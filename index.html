@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full bg-[#F9F6F0]">
+<!--- Browser+ TSB Transmedia Story Builder v1.0 --> 
+<!--- CC BY mgea, 10/10/2026                    -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browser+TSBuilder v1.0 </title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans for geometric flat design typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+    
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cream: '#F9F6F0',
+              beige: '#E8E2D5',
+              beigedark: '#DFCFC0',
+              terracotta: '#D96B43',
+              terracottadark: '#C85A32',
+              black: '#1A1A1A',
+              cardbg: '#FAF8F5',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Space Grotesk"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom scrollbar & flat design resets */
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #F9F6F0;
+      color: #1A1A1A;
+    }
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+    
+    /* Smooth transitions */
+    .transition-flat {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    /* Custom image fallback styling */
+    img.img-fitted {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* Hide scrollbars for clean aesthetic */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Experiencias embebidas: neutraliza dimensiones fijas típicas de H5P. */
+    #experiences-container { width: 100%; max-width: 100%; min-width: 0; }
+    #experiences-container > * { min-width: 0; max-width: 100%; }
+    .experience-embed { width: 100%; max-width: 100%; min-width: 0; overflow: hidden; }
+    .experience-embed .embed-responsive-frame {
+      display: block !important; width: 100% !important; max-width: 100% !important;
+      height: clamp(360px, 72vh, 900px) !important; min-height: 320px !important;
+      border: 0 !important; box-sizing: border-box !important;
+    }
+    .experience-embed iframe, .experience-embed object, .experience-embed embed,
+    .experience-embed video, .experience-embed img {
+      max-width: 100% !important; box-sizing: border-box !important;
+    }
+    .experience-embed iframe, .experience-embed object, .experience-embed embed {
+      width: 100% !important; border: 0 !important;
+    }
+    .experience-embed video, .experience-embed img { height: auto !important; }
+    .experience-embed [style*="width"], .experience-embed [width] {
+      max-width: 100% !important;
+    }
+    @media (max-width: 640px) {
+      .experience-embed .embed-responsive-frame { height: 72vh !important; min-height: 300px !important; }
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col justify-between selection:bg-[#D96B43] selection:text-white">
+
+  <!-- ==================== HEADER BLOCK ==================== -->
+  <header class="bg-[#1A1A1A] text-[#F9F6F0] border-b-4 border-[#D96B43] sticky top-0 z-40 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        
+        <!-- Logo & Main Title -->
+        <div class="flex items-center space-x-3.5">
+          <div class="w-12 h-12 bg-[#000] rounded-lg overflow-hidden flex items-center justify-center p-1 border border-white/20 shrink-0">
+            <img src="TSCBuilder_logo.png" alt="TCB Logo" class="w-full h-full " 
+                 onerror="this.onerror=null; this.src='https://placehold.co/100x100/D96B43/FFFFFF?text=TCB';">
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-base sm:text-lg font-bold font-display tracking-tight leading-tight text-white">
+                Proyecto de Storytelling transmedial
+              </h1>
+            </div>
+            <p class="text-xs text-[#E8E2D5]/80 font-light hidden sm:block">Plataforma de gestión, visualización y diseño de narrativas transmedia</p>
+          </div>
+        </div>
+
+        <!-- Action Toolbar & Drag Drop Zone -->
+        <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+          
+          <!-- Browser de fichas transmedia -->
+          <label class="relative cursor-pointer border border-[#D96B43] bg-[#D96B43] hover:bg-[#C85A32] text-white px-3 py-1.5 rounded-md transition-flat flex items-center gap-2 text-xs font-semibold">
+            <i class="fa-solid fa-folder-open"></i><span>Explorar fichas</span>
+            <input id="folder-input" type="file" accept=".json,application/json" webkitdirectory directory multiple class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" aria-label="Seleccionar carpeta de fichas JSON">
+          </label>
+          <!-- Dropzone Button -->
+          <div id="drop-zone" class="relative group cursor-pointer border-2 border-dashed border-[#E8E2D5]/40 hover:border-[#D96B43] bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-md transition-flat flex items-center gap-2">
+            <i class="fa-solid fa-file-arrow-up text-[#D96B43]"></i>
+            <span class="text-xs font-medium text-[#E8E2D5] group-hover:text-white">Abrir proyecto</span>
+            <input type="file" id="json-file-input" accept=".json" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
+          </div>
+
+          <!-- View Switcher -->
+          <div class="inline-flex bg-black/40 p-1 rounded-lg border border-white/10">
+            <button id="btn-view-mode" onclick="switchMode('viewer')" class="px-3 py-1 text-xs font-semibold rounded-md transition-flat bg-[#D96B43] text-white">
+              <i class="fa-solid fa-eye mr-1"></i> 
+            </button>
+            <button id="btn-editor-mode" onclick="switchMode('editor')" class="px-3 py-1 text-xs font-semibold rounded-md transition-flat text-[#E8E2D5] hover:text-white">
+              <i class="fa-solid fa-pen-to-square mr-1"></i> 
+            </button>
+          </div>
+
+          <!-- Export Button -->
+          <button onclick="exportJSON()" class="bg-[#E8E2D5] hover:bg-white text-[#1A1A1A] font-bold text-xs px-3 py-1.5 rounded-md border border-black/20 flex items-center gap-1.5 transition-flat">
+            <i class="fa-solid fa-download text-[#D96B43]"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Notification Banner for errors or status -->
+  <div id="notification-banner" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+    <div id="notification-content" class="p-3 rounded-lg border text-sm flex items-center justify-between">
+      <span id="notification-message"></span>
+      <button onclick="dismissNotification()" class="text-xs ml-4 underline font-semibold">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+    
+    <!-- ==================== BROWSER DE PROYECTOS TRANSMEDIA ==================== -->
+    <section id="view-project-browser" class="space-y-6">
+      <div class="bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-6 md:p-8 shadow-sm relative overflow-hidden">
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-[#D96B43]"></div>
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[.2em] text-[#D96B43] mb-2">Archivo transmedia</p>
+            <h2 class="text-3xl sm:text-4xl font-extrabold font-display tracking-tight">Explorador de proyectos</h2>
+            <p class="mt-2 text-sm text-gray-600 max-w-2xl">Explora las fichas TSC Builder como una biblioteca de proyectos. Selecciona una carpeta con archivos JSON para construir tu catálogo local.</p>
+          </div>
+          <label class="shrink-0 cursor-pointer bg-[#1A1A1A] hover:bg-[#D96B43] text-white font-bold text-sm px-4 py-3 rounded-lg transition-flat flex items-center justify-center gap-2">
+            <i class="fa-solid fa-folder-tree"></i> Cargar carpeta de fichas
+            <input id="folder-input-main" type="file" accept=".json,application/json" webkitdirectory directory multiple class="hidden">
+          </label>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-7">
+          <div class="bg-white border border-[#E8E2D5] rounded-lg p-4"><p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Proyectos en catálogo</p><p id="browser-count" class="font-display text-2xl font-bold mt-1">1</p></div>
+          <div class="bg-white border border-[#E8E2D5] rounded-lg p-4"><p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Años disponibles</p><p id="browser-years" class="font-display text-2xl font-bold mt-1">1</p></div>
+          <div class="bg-white border border-[#E8E2D5] rounded-lg p-4"><p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Categorías / etiquetas</p><p id="browser-tags-count" class="font-display text-2xl font-bold mt-1">6</p></div>
+        </div>
+      </div>
+
+      <div class="bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-4 md:p-5 shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+          <div class="md:col-span-5 relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+            <input id="browser-search" type="search" placeholder="Buscar por título, grupo, autor o palabra clave…" class="w-full pl-9 pr-3 py-2.5 rounded-lg border border-[#DFCFC0] bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#D96B43]">
+          </div>
+          <div class="md:col-span-3">
+            <select id="browser-tag-filter" class="w-full py-2.5 px-3 rounded-lg border border-[#DFCFC0] bg-white text-sm"><option value="">Todas las palabras clave</option></select>
+          </div>
+          <div class="md:col-span-2">
+            <select id="browser-year-filter" class="w-full py-2.5 px-3 rounded-lg border border-[#DFCFC0] bg-white text-sm"><option value="">Todos los años</option></select>
+          </div>
+          <div class="md:col-span-2">
+            <select id="browser-sort" class="w-full py-2.5 px-3 rounded-lg border border-[#DFCFC0] bg-white text-sm" aria-label="Ordenar proyectos">
+              <option value="title">A–Z</option><option value="year-desc">Año: reciente</option><option value="year-asc">Año: antiguo</option><option value="tag">Palabra clave</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-2 mt-4">
+          <p id="browser-results-label" class="text-xs text-gray-500">Mostrando proyectos</p>
+          <button id="browser-reset" class="text-xs font-bold text-[#C85A32] hover:underline"><i class="fa-solid fa-rotate-left mr-1"></i>Limpiar filtros</button>
+        </div>
+      </div>
+      <div id="browser-cards" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5"></div>
+      <div id="browser-empty" class="hidden bg-white border border-dashed border-[#DFCFC0] rounded-xl p-10 text-center">
+        <i class="fa-solid fa-folder-open text-3xl text-[#D96B43]"></i>
+        <h3 class="font-display font-bold text-xl mt-3">No se encontraron fichas</h3>
+        <p class="text-sm text-gray-500 mt-1">Prueba a cambiar los filtros o carga una carpeta que contenga archivos .json de TSC Builder.</p>
+      </div>
+      <p class="text-[11px] text-gray-500 leading-relaxed"><i class="fa-solid fa-circle-info mr-1 text-[#D96B43]"></i>La carpeta se lee localmente en tu navegador; los archivos no se suben a un servidor. Se buscan fichas JSON y se ignoran los archivos que no tengan una estructura de proyecto.</p>
+    </section>
+
+    <!-- ==================== VIEW 1: PROJECT VISUALIZER ==================== -->
+    <div id="view-project-visualizer" class="space-y-10 hidden">
+      <button id="browser-back" class="inline-flex items-center gap-2 text-sm font-bold text-[#C85A32] hover:underline"><i class="fa-solid fa-arrow-left"></i> Volver al explorador</button>
+      
+      <!----------- BLOQUE PROYECTO --------------->
+      <section class="bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-6 md:p-8 shadow-sm relative overflow-hidden">
+        <!-- Accent decorative bar -->
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-[#D96B43]"></div>
+
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+          
+          <!-- Project Logo Image -->
+          <div class="md:col-span-3 lg:col-span-4 flex justify-center md:justify-start">
+            <div class="w-full max-w-[500px] bg-[#E8E2D5]/40 rounded-xl border border-[#DFCFC0] overflow-hidden flex items-center justify-center p-2">
+              <img
+                id="project-logo"
+                src=""
+                alt="Logo Proyecto"
+                class="block w-full h-auto object-contain rounded-lg"
+                onerror="this.onerror=null; this.src='https://placehold.co/500x300/E8E2D5/1A1A1A?text=Proyecto+Transmedia';"
+              >
+            </div>
+          </div>
+
+          <!-- Project Main Details -->
+          <div class="md:col-span-9 lg:col-span-8 flex flex-col justify-between space-y-4">
+            
+            <div>
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-[#D96B43] bg-[#D96B43]/10 px-2.5 py-1 rounded-md border border-[#D96B43]/20">
+                  <i class="fa-solid fa-cube mr-1"></i> Ficha Transmedia v<span id="project-version">1.5</span>
+                </span>
+                <span id="project-date" class="text-xs font-medium text-gray-500 bg-[#E8E2D5]/50 px-3 py-1 rounded-full border border-[#DFCFC0]">
+                  Año: --
+                </span>
+              </div>
+
+              <h2 id="project-title" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#1A1A1A] font-display tracking-tight leading-tight">
+                Cargando título del proyecto...
+              </h2>
+
+              <p id="project-description" class="mt-3 text-sm sm:text-base text-gray-700 leading-relaxed max-w-4xl font-normal">
+                Cargando descripción detallada...
+              </p>
+            </div>
+
+            <!-- Keywords Badges -->
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Palabras clave & Categorías</h4>
+              <div id="project-keywords" class="flex flex-wrap gap-1.5 sm:gap-2">
+                <!-- Badges populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Authors, Group, RRSS & Avatars Grid Layout -->
+            <div class="pt-4 border-t border-[#DFCFC0]/60 grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-gray-600">
+              
+              <!-- Columna Izquierda: Grupo + RRSS -->
+              <div class="space-y-2">
+                <div>
+                  <span class="font-bold text-[#1A1A1A]">Grupo / Colectivo:</span> 
+                  <span id="project-group" class="block font-medium text-sm text-[#1A1A1A] mt-0.5">--</span>
+                </div>
+                <div id="project-rrss-section" class="pt-1">
+                  <div id="project-rrss-container" class="flex flex-wrap gap-2.5 items-center mt-1">
+                    <!-- RRSS inyectadas en JS -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Columna Derecha: Autores + Avatares -->
+              <div class="space-y-2">
+                <div>
+                  <span class="font-bold text-[#1A1A1A]">Autores/as:</span> 
+                  <span id="project-authors" class="block font-medium text-sm text-[#1A1A1A] mt-0.5">--</span>
+                </div>
+                <div id="project-avatar-section" class="pt-1">
+                  <div id="project-avatar-container" class="flex flex-wrap gap-2.5 items-center mt-1">
+                    <!-- Avatares inyectados en JS -->
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!------- BLOQUE DEFINICIÓN DE PERSONAJES ----------->
+      <section class="space-y-4">
+        
+        <!-- Section Header & Character Selector Navigation -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DFCFC0] pb-3">
+          <div class="flex items-center gap-2">
+            <div class="w-3 h-6 bg-[#D96B43] rounded-sm"></div>
+            <h3 class="text-xl sm:text-2xl font-bold font-display text-[#1A1A1A]">Fichas de Personajes</h3>
+          </div>
+          
+          <!-- Character Nav Tabs -->
+          <div id="character-tabs-container" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <!-- Tabs injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Character Details Container -->
+        <div id="character-card-container" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Rendered via JS -->
+        </div>
+
+      </section>
+
+      <!-- BLOQUE EXPERIENCIAS INTERACTIVAS -->
+      <section class="space-y-4 pt-4 border-t border-[#DFCFC0]">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-3 h-6 bg-[#D96B43] rounded-sm"></div>
+          <h3 class="text-xl sm:text-2xl font-bold font-display text-[#1A1A1A]">Experiencias Interactivas & Multimedia</h3>
+        </div>
+
+        <div id="experiences-container" class="w-full max-w-full min-w-0 mx-auto grid grid-cols-1 gap-6"></div>
+
+      </section>
+
+      <!---------- BLOQUE MAPA DE CONEXIONES NARRATIVAS ------------>
+      <section class="space-y-4 pt-4 border-t border-[#DFCFC0]">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-3 h-6 bg-[#D96B43] rounded-sm"></div>
+          <div>
+            <h3 class="text-xl sm:text-2xl font-bold font-display text-[#1A1A1A]">Mapa de Conexiones Narrativas</h3>
+            <p class="text-xs text-gray-600">Extensión del universo transmedia y enlaces a otros formatos del proyecto</p>
+          </div>
+        </div>
+
+        <div id="narrative-connections-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Populated via JS -->
+        </div>
+      </section>
+
+      <!---------- BLOQUE PROCESO DE DISEÑO & METODOLOGÍA ------------>
+      <section class="space-y-4 pt-4 border-t border-[#DFCFC0]">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-3 h-6 bg-[#D96B43] rounded-sm"></div>
+          <div>
+            <h3 class="text-xl sm:text-2xl font-bold font-display text-[#1A1A1A]">Proceso de Diseño & Metodología</h3>
+            <p class="text-xs text-gray-600">Inspiración, referencias visuales, herramientas y flujo de desarrollo</p>
+          </div>
+        </div>
+
+        <div id="design-process-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Populated via JS -->
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ==================== VIEW 2: JSON EDITOR & GENERATOR ==================== -->
+    <div id="view-project-editor" class="hidden space-y-6">
+      
+      <div class="bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-6 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#DFCFC0] pb-4 mb-6">
+          <div>
+            <h2 class="text-2xl font-bold font-display text-[#1A1A1A]">Editor y Creador de Ficha JSON</h2>
+            <p class="text-xs text-gray-600">Crea o modifica la plantilla transmedia en formato JSON e insértala directamente en la vista.</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="loadDemoTemplate()" class="px-3 py-1.5 text-xs font-semibold rounded bg-[#E8E2D5] hover:bg-[#DFCFC0] text-[#1A1A1A] transition-flat">
+              <i class="fa-solid fa-rotate-left mr-1"></i> Cargar Plantilla Demo
+            </button>
+            <button onclick="applyEditorData()" class="px-4 py-1.5 text-xs font-bold rounded bg-[#D96B43] hover:bg-[#C85A32] text-white transition-flat shadow-sm">
+              <i class="fa-solid fa-check mr-1"></i> Aplicar Cambios al Proyecto
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <!-- Raw JSON Editor -->
+          <div class="lg:col-span-12 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-bold text-gray-700 uppercase tracking-wider">Código JSON del Proyecto Transmedia</label>
+              <span id="json-syntax-status" class="text-xs text-emerald-600 font-medium">Sintaxis Válida</span>
+            </div>
+            <textarea id="json-textarea" class="w-full h-96 font-mono text-xs p-4 bg-[#1A1A1A] text-[#F9F6F0] rounded-xl border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#D96B43] leading-relaxed" spellcheck="false"></textarea>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ==================== FOOTER BLOCK ==================== -->
+  <footer class="bg-[#1A1A1A] text-[#E8E2D5] border-t-4 border-[#D96B43] py-6 px-4 mt-12">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs">
+      
+      <div class="space-y-1">
+        <div class="font-bold text-white text-sm tracking-wide font-display">TSB Transmedia StoryBuilder</div>
+        <ul class="space-y-1 text-[#DFCFC0]">
+          <li class="flex items-center gap-1.5">
+            <i class="fa-brands fa-github text-[#D96B43]"></i>
+            <a href="https://github.com/mgea/criav" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-white">Creatividad e Innovación Audiovisual</a>
+          </li>
+          <li class="flex items-center gap-1.5">
+            <i class="fa-solid fa-graduation-cap text-[#D96B43]"></i>
+            <a href="https://fcd.ugr.es/" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-white">Grado en Comunicación Audiovisual, Facultad de Comunicación y Documentación</a>
+          </li>
+          <li class="flex items-center gap-1.5">
+            <i class="fa-solid fa-university text-[#D96B43]"></i>
+            <span>Universidad de Granada</span>
+          </li>
+          <li class="flex items-center gap-1.5">
+            <i class="fa-regular fa-copyright text-[#D96B43]"></i>
+            <span>TSB 1.0 CCBY <a href="https://github.com/mgea" target="_blank"> Miguel Gea </a></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="text-right text-[11px] text-gray-400 border-t md:border-t-0 border-white/10 pt-3 md:pt-0 w-full md:w-auto">
+        <span>Diseño Flat Design Minimalista • Versión TSB 1.0</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT APP LOGIC ==================== -->
+  <script>
+    // Embedded Default Demo Data
+    const DEMO_PROJECT_DATA = {
+      "titulo": "Nora y la Red Invisible",
+      "descripcion": "Un proyecto transmedia de misterio y tecno-ficción que explora la desconexión social y el control algorítmico en una metrópolis hiperconectada. La narrativa se expande mediante episodios interactivos, ciber-novelas, un podcast argumental y experiencias de realidad alternativa (ARG).",
+      "palabrasClave": ["Ficción", "Sci-Fi", "Misterio", "Realidad Alternativa", "Cyberpunk", "Cómic Interactivo"],
+      "imagen": "assets/nora_logo.png",
+      "grupo": "Colectivo Transmedia UGR - Grupo 04",
+      "autores": "Miguel Gea, Elena Valenzuela & Lucas Romero",
+      "fecha": "2026",
+      "version": "1.5",
+      "RRSS": [
+        { "nombre": "Twitter", "link": "https://twitter.com", "img": "" },
+        { "nombre": "Instagram", "link": "https://instagram.com", "img": "" },
+        { "nombre": "YouTube", "link": "https://youtube.com", "img": "" },
+        { "nombre": "GitHub", "link": "https://github.com/mgea", "img": "" },
+        { "nombre": "Web Oficial", "link": "https://ugr.es", "img": "" }
+      ],
+      "Avatar": [
+        { "nombre": "Miguel Gea", "link": "https://github.com/mgea", "img": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+        { "nombre": "Elena Valenzuela", "link": "#", "img": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
+        { "nombre": "Lucas Romero", "link": "#", "img": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+      ],
+      "personajes": [
+        {
+          "nombre": "Nora Vance",
+          "cita": "«Si no estás en el algoritmo, eres libre... pero si eres libre, no existes para el sistema.»",
+          "biografia": "Antigua ingeniera de datos de Synapse Corp. Tras descubrir una anomalía informática que borraba identidades digitales reales de ciudadanos vulnerables, decidió aislarse de la red principal y operar como activista 'fantasma' en los suburbios analógicos.",
+          "objetivo": "Desmantelar el protocolo de supresión de memoria digital de Synapse Corp y revelar la verdad detrás del 'Gran Apagón de Datos' que borró a su familia.",
+          "conflicto": "Debe arriesgar su propio anonimato al conectarse a terminales públicas infectadas, mientras lucha contra un implante neuronal defectuoso que deteriora progresivamente sus recuerdos.",
+          "etiquetas": ["Protagonista", "Hacker", "Exiliada", "Tecno-activista"],
+          "url": "assets/nora.jpg",
+          "alt": "Retrato de Nora Vance con chaqueta oscura y mirada fija entre destellos de luz de terminales digitales",
+          "personalidad": "Introvertida, metódica, sumamente observadora y pragmática. Mantiene una desconfianza sistemática hacia las corporaciones.",
+          "motivacion": "El deseo irrenunciable de justicia y el anhelo de recuperar los recuerdos borrados de sus seres queridos.",
+          "habilidades": "Criptografía avanzada, ingeniería inversa de software, supervivencia urbana analógica.",
+          "debilidades": "Dificultad severa para confiar en otras personas, migrañas inducidas por sobrecarga sensorial tecnológica.",
+          "secreto": "Conserva el único fragmento de código fuente original capaz de apagar permanentemente la IA central de la ciudad."
+        },
+        {
+          "nombre": "Dante Reyes",
+          "cita": "«La información no quiere ser libre, quiere tener dueño y cotizar en bolsa.»",
+          "biografia": "Operador del mercado negro de datos y enlace entre las corporaciones del centro urbano y la resistencia periférica. Regenta un taller mecánico de antigüedades tecnológicas como fachada.",
+          "objetivo": "Asegurar su supervivencia financiera y garantizar la estabilidad de su sector comunitario mediante información chantajeable.",
+          "conflicto": "Se encuentra acorralado entre el dinero que le ofrece Synapse Corp por capturar a Nora y el afecto casi paternal que siente por ella.",
+          "etiquetas": ["Antihéroe", "Informante", "Estratega", "Comerciante"],
+          "url": "assets/dante.jpg",
+          "alt": "Retrato de Dante Reyes con herramientas analógicas en su taller",
+          "personalidad": "Carismático, cínico, rápido de palabra, calculador pero con un código ético personal inviolable.",
+          "motivacion": "Proteger el barrio periférico 'Sector 8' donde creció de la invasión corporativa.",
+          "habilidades": "Negociación bajo presión, modificación de hardware antiguo, redes de contacto.",
+          "debilidades": "Codicia por antigüedades analógicas valiosas, deuda financiera con mercenarios corporativos.",
+          "secreto": "Fue quien vendió accidentalmente las credenciales que permitieron a Synapse rastrear a la familia de Nora en el pasado."
+        }
+      ],
+      "experiencias": [
+        {
+          "tipo": "incrustado",
+          "experiencia": "Interactivo H5P: Test de Lealtad Digital",
+          "descripcion": "Experiencia interactiva que simula un cuestionario de evaluación psicológica de Synapse Corp para sumergir al usuario en la atmósfera del universo.",
+          "embed": "<div class=\"w-full h-48 bg-[#1A1A1A] text-[#F9F6F0] rounded-lg p-6 flex flex-col justify-center items-center text-center border border-[#D96B43]/40\"><i class=\"fa-solid fa-gamepad text-3xl text-[#D96B43] mb-2\"></i><h4 class=\"font-bold font-display text-lg\">Simulador Interactivo H5P</h4><p class=\"text-xs text-gray-400 max-w-md mt-1\">Cargando módulo interactivo de toma de decisiones... (Representación embebida de recurso H5P)</p><button onclick=\"alert('Módulo H5P ejecutado en modo demostración.')\" class=\"mt-3 bg-[#D96B43] hover:bg-[#C85A32] text-white text-xs px-4 py-1.5 rounded font-semibold\">Iniciar Cuestionario</button></div>"
+        },
+        {
+          "tipo": "galeria",
+          "experiencia": "Galería de Arte Conceptual & Escenarios",
+          "url": [
+            "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1515260268569-9271009adfdb?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=600&q=80"
+          ]
+        }
+      ],
+      "conexiones": [
+        {
+          "plataforma": "Podcast 'Ecos de Synapse'",
+          "tipo": "Audio-serie documental",
+          "imagen": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=200&q=80",
+          "enlace": "https://spotify.com"
+        },
+        {
+          "plataforma": "Cómic Web 'Sector 8'",
+          "tipo": "Novela Gráfica Digital",
+          "imagen": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=200&q=80",
+          "enlace": "https://webtoons.com"
+        },
+        {
+          "plataforma": "Repositorio del Cero (GitHub)",
+          "tipo": "Documentación & Archivos ARG",
+          "imagen": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=200&q=80",
+          "enlace": "https://github.com/mgea/criav"
+        }
+      ],
+      "procesoDisenoMetodologia": {
+        "inspiracion": {
+          "referentes": [
+            "Estética Cyberpunk minimalista de Blade Runner 2049",
+            "Diseño editorial suizo con maquetación en cuadrícula",
+            "Interfaces analógicas e industriales"
+          ],
+          "moodboardUrl": "https://pinterest.com",
+          "palabraConcepto": "Tonos cálidos y terracota contrastando con la frialdad de la red digital."
+        },
+        "metodologia": {
+          "marcoframing": "Design Thinking & Transmedia Storytelling Canvas",
+          "fasesProceso": [
+            "Investigación y construcción del universo (Worldbuilding)",
+            "Diseño de arquetipos y bibliotecas de personajes",
+            "Prototipado de experiencias interactivas y multimedia",
+            "Mapeo de plataformas de distribución y extensión narrativa"
+          ]
+        },
+        "herramientas": [
+          {
+            "categoria": "Diseño UI/UX",
+            "items": ["Figma", "Tailwind CSS", "FontAwesome"]
+          },
+          {
+            "categoria": "Desarrollo & Prototipado",
+            "items": ["HTML5/JS ES6", "H5P", "JSON Schema"]
+          },
+          {
+            "categoria": "Gestión & Documentación",
+            "items": ["GitHub", "Markdown", "Notion"]
+          }
+        ]
+      }
+    };
+
+    function getSocialIconClass(name) {
+      const n = String(name || '').toLowerCase().trim();
+      if (n.includes('twitter') || n.includes('x.com')) return 'fa-brands fa-x-twitter';
+      if (n.includes('instagram')) return 'fa-brands fa-instagram';
+      if (n.includes('youtube')) return 'fa-brands fa-youtube';
+      if (n.includes('facebook')) return 'fa-brands fa-facebook';
+      if (n.includes('github')) return 'fa-brands fa-github';
+      if (n.includes('web') || n.includes('site') || n.includes('sitio') || n.includes('pagina') || n.includes('página')) return 'fa-solid fa-globe';
+      return null;
+    }
+
+    // ==================== EXPLORADOR DE FICHAS ====================
+    let browserProjects = [{ data: DEMO_PROJECT_DATA, filename: "Proyecto de demostración", source: "demo" }];
+
+    function projectTags(data) {
+      const tags = Array.isArray(data.palabrasClave) ? data.palabrasClave : [];
+      return [...new Set(tags.map(t => String(t).trim()).filter(Boolean))];
+    }
+    function safeText(value, fallback = "No especificado") {
+      return value === undefined || value === null || String(value).trim() === "" ? fallback : String(value);
+    }
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+    }
+    function projectYear(data) {
+      const match = String(data.fecha || "").match(/\d{4}/);
+      return match ? match[0] : "Sin año";
+    }
+    function validProject(data) {
+      return data && typeof data === "object" && !Array.isArray(data) &&
+        (data.titulo || data.grupo || data.autores || Array.isArray(data.palabrasClave));
+    }
+    function renderProjectBrowser() {
+      const search = (document.getElementById("browser-search")?.value || "").trim().toLocaleLowerCase("es");
+      const tag = document.getElementById("browser-tag-filter")?.value || "";
+      const year = document.getElementById("browser-year-filter")?.value || "";
+      const sort = document.getElementById("browser-sort")?.value || "title";
+      const filtered = browserProjects.filter(p => {
+        const d = p.data;
+        const haystack = [d.titulo, d.grupo, d.autores, d.descripcion, ...projectTags(d)].join(" ").toLocaleLowerCase("es");
+        return (!search || haystack.includes(search)) && (!tag || projectTags(d).includes(tag)) && (!year || projectYear(d) === year);
+      });
+      filtered.sort((a,b) => {
+        if (sort === "year-desc") return projectYear(b.data).localeCompare(projectYear(a.data)) || String(a.data.titulo || "").localeCompare(String(b.data.titulo || ""), "es");
+        if (sort === "year-asc") return projectYear(a.data).localeCompare(projectYear(a.data)) || String(a.data.titulo || "").localeCompare(String(b.data.titulo || ""), "es");
+        if (sort === "tag") return (projectTags(a.data)[0] || "zzzz").localeCompare(projectTags(b.data)[0] || "zzzz", "es") || String(a.data.titulo || "").localeCompare(String(b.data.titulo || ""), "es");
+        return String(a.data.titulo || "").localeCompare(String(b.data.titulo || ""), "es", { sensitivity: "base" });
+      });
+      const cards = document.getElementById("browser-cards");
+      cards.innerHTML = "";
+      filtered.forEach(project => {
+        const d = project.data;
+        const card = document.createElement("article");
+        card.className = "bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#D96B43] transition-flat flex flex-col";
+        const tags = projectTags(d);
+        const imageSrc = safeText(d.imagen, "");
+        const tagHtml = tags.slice(0, 4).map(t => `<span class="inline-block text-[10px] font-semibold px-2 py-1 rounded bg-[#E8E2D5] border border-[#DFCFC0]">${escapeHTML(t)}</span>`).join("");
+        card.innerHTML = `
+          <div class="h-44 bg-[#E8E2D5]/60 border-b border-[#DFCFC0] relative overflow-hidden">
+            <img src="${escapeHTML(imageSrc || 'https://placehold.co/800x450/E8E2D5/1A1A1A?text=Proyecto+Transmedia')}" alt="Imagen de ${escapeHTML(safeText(d.titulo, "proyecto"))}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E8E2D5/1A1A1A?text=Proyecto+Transmedia'">
+            <span class="absolute top-3 right-3 bg-[#1A1A1A]/90 text-white text-xs font-bold px-2.5 py-1 rounded-md">${escapeHTML(projectYear(d))}</span>
+          </div>
+          <div class="p-5 flex flex-col flex-grow">
+            <div class="flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-[#D96B43] mb-2"><i class="fa-solid fa-cube"></i> Ficha transmedia</div>
+            <h3 class="font-display font-bold text-xl leading-tight">${escapeHTML(safeText(d.titulo, "Proyecto sin título"))}</h3>
+            <div class="mt-3 text-xs text-gray-600 space-y-1.5">
+              <p><i class="fa-solid fa-people-group w-4 text-[#D96B43]"></i><span class="font-bold text-[#1A1A1A]"> Grupo:</span> ${escapeHTML(safeText(d.grupo))}</p>
+              <p><i class="fa-solid fa-user-pen w-4 text-[#D96B43]"></i><span class="font-bold text-[#1A1A1A]"> Autores:</span> ${escapeHTML(safeText(d.autores))}</p>
+            </div>
+            <div class="flex flex-wrap gap-1.5 mt-4">${tagHtml || '<span class="text-xs text-gray-400 italic">Sin palabras clave</span>'}${tags.length > 4 ? `<span class="text-[10px] text-gray-500 px-1 py-1">+${tags.length-4}</span>` : ""}</div>
+            <div class="mt-auto pt-5">
+              <button class="open-project w-full bg-[#1A1A1A] hover:bg-[#D96B43] text-white font-bold text-xs py-2.5 px-4 rounded-lg transition-flat flex items-center justify-center gap-2"><i class="fa-solid fa-book-open"></i> Abrir ficha <i class="fa-solid fa-arrow-right ml-auto"></i></button>
+            </div>
+          </div>`;
+        card.querySelector(".open-project").addEventListener("click", () => openBrowserProject(project));
+        cards.appendChild(card);
+      });
+      document.getElementById("browser-count").textContent = browserProjects.length;
+      document.getElementById("browser-years").textContent = new Set(browserProjects.map(p => projectYear(p.data)).filter(y => y !== "Sin año")).size;
+      document.getElementById("browser-tags-count").textContent = new Set(browserProjects.flatMap(p => projectTags(p.data))).size;
+      document.getElementById("browser-results-label").textContent = `Mostrando ${filtered.length} de ${browserProjects.length} proyecto${browserProjects.length === 1 ? "" : "s"}`;
+      document.getElementById("browser-empty").classList.toggle("hidden", filtered.length !== 0);
+      const tagSelect = document.getElementById("browser-tag-filter");
+      const oldTag = tagSelect.value;
+      tagSelect.innerHTML = '<option value="">Todas las palabras clave</option>';
+      [...new Set(browserProjects.flatMap(p => projectTags(p.data)))].sort((a,b) => a.localeCompare(b, "es")).forEach(t => tagSelect.add(new Option(t,t)));
+      if ([...tagSelect.options].some(o => o.value === oldTag)) tagSelect.value = oldTag;
+      const yearSelect = document.getElementById("browser-year-filter");
+      const oldYear = yearSelect.value;
+      yearSelect.innerHTML = '<option value="">Todos los años</option>';
+      [...new Set(browserProjects.map(p => projectYear(p.data)))].sort((a,b) => b.localeCompare(a)).forEach(y => yearSelect.add(new Option(y,y)));
+      if ([...yearSelect.options].some(o => o.value === oldYear)) yearSelect.value = oldYear;
+    }
+    function openBrowserProject(project) {
+      loadProjectData(project.data, `Ficha "${safeText(project.data.titulo, project.filename)}" abierta.`);
+      document.getElementById("view-project-browser").classList.add("hidden");
+      document.getElementById("view-project-visualizer").classList.remove("hidden");
+      document.getElementById("view-project-editor").classList.add("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    async function loadFolderFiles(fileList) {
+      const files = [...fileList].filter(f => f.name.toLowerCase().endsWith(".json"));
+      if (!files.length) {
+        showNotification("No se encontraron archivos .json en la carpeta seleccionada.", "error");
+        return;
+      }
+      const loaded = [];
+      let ignored = 0;
+      for (const file of files) {
+        try {
+          const data = JSON.parse(await file.text());
+          if (validProject(data)) loaded.push({ data, filename: file.webkitRelativePath || file.name, source: "folder" });
+          else ignored++;
+        } catch (_) { ignored++; }
+      }
+      if (!loaded.length) {
+        showNotification("No se encontraron fichas TSC Builder válidas. Comprueba que los JSON contienen campos como titulo, grupo o palabrasClave.", "error");
+        return;
+      }
+      browserProjects = loaded;
+      document.getElementById("browser-search").value = "";
+      document.getElementById("browser-tag-filter").value = "";
+      document.getElementById("browser-year-filter").value = "";
+      renderProjectBrowser();
+      showNotification(`Catálogo cargado: ${loaded.length} ficha(s)${ignored ? `; ${ignored} archivo(s) ignorado(s)` : ""}.`, "success");
+    }
+    function initProjectBrowser() {
+      ["browser-search","browser-tag-filter","browser-year-filter","browser-sort"].forEach(id => {
+        document.getElementById(id).addEventListener(id === "browser-search" ? "input" : "change", renderProjectBrowser);
+      });
+      document.getElementById("browser-reset").addEventListener("click", () => {
+        document.getElementById("browser-search").value = "";
+        document.getElementById("browser-tag-filter").value = "";
+        document.getElementById("browser-year-filter").value = "";
+        document.getElementById("browser-sort").value = "title";
+        renderProjectBrowser();
+      });
+      document.getElementById("browser-back").addEventListener("click", () => {
+        document.getElementById("view-project-visualizer").classList.add("hidden");
+        document.getElementById("view-project-browser").classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      ["folder-input","folder-input-main"].forEach(id => document.getElementById(id).addEventListener("change", e => {
+        if (e.target.files && e.target.files.length) loadFolderFiles(e.target.files);
+        e.target.value = "";
+      }));
+      renderProjectBrowser();
+    }
+
+    // State Variables
+    let currentData = null;
+    let selectedCharacterIndex = 0;
+    let galleryViewModes = {};
+    let galleryCarouselIndices = {};
+
+    window.onload = function() {
+      initApp();
+    };
+
+    function initApp() {
+      setupDragAndDrop();
+      setupFileInput();
+      initProjectBrowser();
+      loadProjectData(DEMO_PROJECT_DATA);
+      document.getElementById('view-project-browser').classList.remove('hidden');
+      document.getElementById('view-project-visualizer').classList.add('hidden');
+    }
+
+    function loadProjectData(data, successMessage = null) {
+      try {
+        if (!data || typeof data !== 'object') throw new Error("El archivo no es un JSON estructurado válido.");
+        
+        currentData = data;
+        selectedCharacterIndex = 0;
+
+        // Populate visualizer
+        renderProjectDetails();
+        renderCharacterTabs();
+        renderSelectedCharacter();
+        renderExperiences();
+        renderNarrativeConnections();
+        renderDesignProcess();
+
+        // Sync with Editor textarea
+        document.getElementById('json-textarea').value = JSON.stringify(currentData, null, 2);
+        updateJsonSyntaxStatus(true);
+
+        if (successMessage) {
+          showNotification(successMessage, "success");
+        }
+      } catch (e) {
+        showNotification("Error en el procesado del archivo JSON: " + e.message, "error");
+      }
+    }
+
+    function setupDragAndDrop() {
+      const dropZone = document.getElementById('drop-zone');
+
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, preventDefaults, false);
+      });
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => dropZone.classList.add('bg-[#D96B43]/20', 'border-[#D96B43]'), false);
+      });
+
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropZone.addEventListener(eventName, () => dropZone.classList.remove('bg-[#D96B43]/20', 'border-[#D96B43]'), false);
+      });
+
+      dropZone.addEventListener('drop', (e) => {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        if (files.length) handleFile(files[0]);
+      });
+    }
+
+    function setupFileInput() {
+      const input = document.getElementById('json-file-input');
+      input.addEventListener('change', (e) => {
+        if (e.target.files.length) handleFile(e.target.files[0]);
+      });
+    }
+
+    function handleFile(file) {
+      if (!file.name.endsWith('.json')) {
+        showNotification("Por favor, selecciona un archivo en formato .json", "error");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          const project = { data: parsed, filename: file.name, source: "single" };
+          if (validProject(parsed)) {
+            if (!browserProjects.some(p => p.filename === file.name)) browserProjects.unshift(project);
+            renderProjectBrowser();
+            openBrowserProject(project);
+          } else {
+            loadProjectData(parsed, `Ficha "${file.name}" cargada correctamente.`);
+            document.getElementById("view-project-browser").classList.add("hidden");
+            document.getElementById("view-project-visualizer").classList.remove("hidden");
+          }
+        } catch (err) {
+          showNotification("Error al parsear el JSON: " + err.message, "error");
+        }
+      };
+      reader.onerror = function() {
+        showNotification("No se pudo leer el archivo local.", "error");
+      };
+      reader.readAsText(file);
+    }
+
+    function renderProjectDetails() {
+      if (!currentData) return;
+
+      document.getElementById('project-title').textContent = currentData.titulo || 'Sin Título';
+      document.getElementById('project-description').textContent = currentData.descripcion || 'Sin Descripción';
+      document.getElementById('project-group').textContent = currentData.grupo || 'No especificado';
+      document.getElementById('project-authors').textContent = currentData.autores || 'No especificados';
+      document.getElementById('project-date').textContent = "Año: " + (currentData.fecha || 'N/A');
+      document.getElementById('project-version').textContent = currentData.version || '1.0';
+
+      const logoImg = document.getElementById('project-logo');
+      logoImg.src = currentData.imagen || 'assets/nora_logo.png';
+      logoImg.alt = "Logotipo " + (currentData.titulo || '');
+
+      // Keywords Badges
+      const kwContainer = document.getElementById('project-keywords');
+      kwContainer.innerHTML = '';
+      if (Array.isArray(currentData.palabrasClave)) {
+        currentData.palabrasClave.forEach(kw => {
+          const badge = document.createElement('span');
+          badge.className = 'text-xs font-semibold px-2.5 py-1 rounded bg-[#E8E2D5] text-[#1A1A1A] border border-[#DFCFC0] shadow-2xs';
+          badge.textContent = kw;
+          kwContainer.appendChild(badge);
+        });
+      }
+
+      // RENDER RRSS
+      const rrssContainer = document.getElementById('project-rrss-container');
+      rrssContainer.innerHTML = '';
+      const rrssList = Array.isArray(currentData.RRSS) ? currentData.RRSS : (Array.isArray(currentData.rrss) ? currentData.rrss : []);
+
+      rrssList.forEach(item => {
+        const iconClass = getSocialIconClass(item.nombre);
+        const link = document.createElement('a');
+        link.href = item.link || '#';
+        if (item.link && item.link !== '#') {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        }
+        link.title = item.nombre || 'Red Social';
+        link.className = 'w-[80px] h-[80px] rounded-full border-2 border-[#DFCFC0] bg-[#FAF8F5] hover:border-[#D96B43] flex flex-col items-center justify-center p-1.5 text-center transition-all duration-300 transform hover:scale-105 shadow-sm group shrink-0 overflow-hidden';
+
+        if (iconClass) {
+          link.innerHTML = `
+            <i class="${iconClass} text-2xl text-[#1A1A1A] group-hover:text-[#D96B43] transition-colors mb-0.5"></i>
+            <span class="text-[9px] font-bold text-gray-700 group-hover:text-[#D96B43] truncate w-full px-0.5">${escapeHTML(item.nombre || 'Red')}</span>
+          `;
+        } else {
+          const imgSrc = item.img || 'https://placehold.co/80x80/E8E2D5/1A1A1A?text=' + encodeURIComponent(item.nombre || 'RRSS');
+          link.innerHTML = `
+            <img src="${escapeHTML(imgSrc)}" alt="${escapeHTML(item.nombre || 'Red Social')}" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='https://placehold.co/80x80/E8E2D5/1A1A1A?text=RRSS';">
+          `;
+        }
+        rrssContainer.appendChild(link);
+      });
+
+      // RENDER AVATARES
+      const avatarContainer = document.getElementById('project-avatar-container');
+      avatarContainer.innerHTML = '';
+      const avatarList = Array.isArray(currentData.Avatar) ? currentData.Avatar : (Array.isArray(currentData.avatar) ? currentData.avatar : []);
+
+      avatarList.forEach(item => {
+        const link = document.createElement('a');
+        link.href = item.link || '#';
+        if (item.link && item.link !== '#') {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        }
+        link.title = item.nombre || 'Avatar';
+        link.className = 'w-[80px] h-[80px] rounded-full border-2 border-[#DFCFC0] bg-[#E8E2D5] hover:border-[#D96B43] flex flex-col items-center justify-center overflow-hidden transition-all duration-300 transform hover:scale-105 shadow-sm group shrink-0 relative';
+
+        const imgSrc = item.img || 'https://placehold.co/80x80/E8E2D5/1A1A1A?text=' + encodeURIComponent(item.nombre || 'Avatar');
+        link.innerHTML = `
+          <img src="${escapeHTML(imgSrc)}" alt="${escapeHTML(item.nombre || 'Avatar')}" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='https://placehold.co/80x80/E8E2D5/1A1A1A?text=Avatar';">
+          ${item.nombre ? `<span class="absolute bottom-0 inset-x-0 bg-black/75 text-white text-[8px] font-bold text-center py-0.5 truncate px-1 opacity-0 group-hover:opacity-100 transition-opacity">${escapeHTML(item.nombre)}</span>` : ''}
+        `;
+        avatarContainer.appendChild(link);
+      });
+    }
+
+    function renderCharacterTabs() {
+      const container = document.getElementById('character-tabs-container');
+      container.innerHTML = '';
+
+      const characters = currentData.personajes || [];
+      if (characters.length === 0) {
+        container.innerHTML = '<span class="text-xs text-gray-500 italic">No hay personajes definidos</span>';
+        return;
+      }
+
+      characters.forEach((char, idx) => {
+        const btn = document.createElement('button');
+        const isActive = idx === selectedCharacterIndex;
+        btn.className = `px-3.5 py-1.5 text-xs font-bold rounded-lg border transition-flat flex items-center gap-1.5 shrink-0 ${
+          isActive 
+            ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow' 
+            : 'bg-[#FAF8F5] text-gray-700 border-[#DFCFC0] hover:bg-[#E8E2D5]'
+        }`;
+        btn.onclick = () => {
+          selectedCharacterIndex = idx;
+          renderCharacterTabs();
+          renderSelectedCharacter();
+        };
+
+        btn.innerHTML = `<i class="fa-solid fa-user ${isActive ? 'text-[#D96B43]' : 'text-gray-400'}"></i> ${char.nombre || 'Personaje ' + (idx + 1)}`;
+        container.appendChild(btn);
+      });
+    }
+
+    function renderSelectedCharacter() {
+      const container = document.getElementById('character-card-container');
+      const characters = currentData.personajes || [];
+
+      if (!characters.length || !characters[selectedCharacterIndex]) {
+        container.innerHTML = '<div class="col-span-12 p-8 text-center text-gray-500">No hay información de personaje disponible.</div>';
+        return;
+      }
+
+      const c = characters[selectedCharacterIndex];
+
+      let tagsHtml = '';
+      if (Array.isArray(c.etiquetas)) {
+        tagsHtml = c.etiquetas.map(tag => 
+          `<span class="inline-block bg-[#D96B43]/15 text-[#D96B43] font-bold text-[11px] px-2 py-0.5 rounded border border-[#D96B43]/30 mr-1 mb-1">#${tag}</span>`
+        ).join('');
+      }
+
+      container.innerHTML = `
+        <!-- Panel A: El Personaje -->
+        <div class="lg:col-span-7 bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-6 shadow-sm flex flex-col justify-between space-y-6">
+          
+          <div class="space-y-4">
+            
+            <div class="flex flex-col sm:flex-row gap-5 items-start">
+              <div class="w-full sm:w-44 h-52 bg-[#E8E2D5] rounded-lg border border-[#DFCFC0] overflow-hidden shrink-0 relative group">
+                <img src="${c.url || 'assets/nora.jpg'}" alt="${c.alt || c.nombre}" 
+                     class="img-fitted"
+                     onerror="this.onerror=null; this.src='https://placehold.co/400x500/E8E2D5/1A1A1A?text=${encodeURIComponent(c.nombre || 'Personaje')}';">
+                <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-flat"></div>
+              </div>
+
+              <div class="flex-grow space-y-2">
+                <div class="text-xs uppercase font-bold text-[#D96B43] tracking-widest">Ficha de Personaje</div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-display leading-tight">${c.nombre || 'Sin Nombre'}</h3>
+                
+                <div class="pt-1">
+                  ${tagsHtml}
+                </div>
+
+                <blockquote class="p-3 bg-[#E8E2D5]/40 rounded-lg border-l-4 border-[#D96B43] italic text-xs text-gray-800 leading-relaxed mt-2">
+                  ${c.cita || '«Sin cita registrada.»'}
+                </blockquote>
+              </div>
+            </div>
+
+            <div class="pt-2">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Biografía y Antecedentes</h4>
+              <p class="text-xs sm:text-sm text-gray-700 leading-relaxed font-normal">${c.biografia || 'Sin información biográfica.'}</p>
+            </div>
+
+          </div>
+
+          <div class="space-y-3 pt-2">
+            
+            <div class="bg-[#D96B43]/10 border-2 border-[#D96B43] p-4 rounded-xl shadow-xs relative overflow-hidden">
+              <h4 class="text-xs font-extrabold uppercase tracking-wider text-[#D96B43] flex items-center gap-1.5 mb-1">
+                <i class="fa-solid fa-bullseye"></i> Objetivo Principal
+              </h4>
+              <p class="text-xs sm:text-sm text-[#1A1A1A] font-medium leading-relaxed">${c.objetivo || 'Sin objetivo declarado.'}</p>
+            </div>
+
+            <div class="bg-white border border-[#DFCFC0] p-3.5 rounded-lg">
+              <h4 class="text-xs font-bold uppercase tracking-wider text-gray-600 flex items-center gap-1.5 mb-1">
+                <i class="fa-solid fa-bolt text-[#D96B43]"></i> Conflicto Central
+              </h4>
+              <p class="text-xs text-gray-700 leading-relaxed">${c.conflicto || 'Sin conflicto registrado.'}</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Panel B: Personalidad -->
+        <div class="lg:col-span-5 bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-6 shadow-sm flex flex-col justify-between space-y-5">
+          
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-[#DFCFC0] mb-4">
+              <h3 class="text-lg font-bold font-display text-[#1A1A1A] flex items-center gap-2">
+                Personalidad & Perfil
+              </h3>
+              <span class="text-[10px] uppercase tracking-wider font-bold text-gray-400">Atributos</span>
+            </div>
+
+            <div class="space-y-3.5 text-xs">
+              <div>
+                <span class="font-bold text-gray-800 uppercase block text-[10px] tracking-wider mb-0.5">Rasgos Psicológicos</span>
+                <p class="text-gray-700 bg-white p-2.5 rounded border border-[#DFCFC0]">${c.personalidad || 'N/A'}</p>
+              </div>
+
+              <div>
+                <span class="font-bold text-gray-800 uppercase block text-[10px] tracking-wider mb-0.5">Motivación Profunda</span>
+                <p class="text-gray-700 bg-white p-2.5 rounded border border-[#DFCFC0]">${c.motivacion || 'N/A'}</p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div>
+                  <span class="font-bold text-gray-800 uppercase block text-[10px] tracking-wider mb-0.5">Habilidades</span>
+                  <p class="text-gray-700 bg-white p-2.5 rounded border border-[#DFCFC0] h-full">${c.habilidades || 'N/A'}</p>
+                </div>
+                <div>
+                  <span class="font-bold text-gray-800 uppercase block text-[10px] tracking-wider mb-0.5">Debilidades</span>
+                  <p class="text-gray-700 bg-white p-2.5 rounded border border-[#DFCFC0] h-full">${c.debilidades || 'N/A'}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#1A1A1A] text-[#F9F6F0] p-4 rounded-xl border-2 border-[#D96B43] shadow-md space-y-1 mt-4">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#D96B43] flex items-center gap-1">
+                <i class="fa-solid fa-lock"></i> Secreto Oculto
+              </span>
+              <span class="text-[9px] bg-white/10 px-1.5 py-0.5 rounded text-gray-300">Confidencial</span>
+            </div>
+            <p class="text-xs leading-relaxed text-[#E8E2D5] font-light pt-1">
+              ${c.secreto || 'Sin secretos revelados.'}
+            </p>
+          </div>
+
+        </div>
+      `;
+    }
+
+    function makeResponsiveEmbed(embedHtml) {
+      const template = document.createElement('template');
+      template.innerHTML = String(embedHtml || '');
+      const fixedTags = template.content.querySelectorAll('iframe, object, embed');
+      fixedTags.forEach((el) => {
+        el.removeAttribute('width');
+        el.removeAttribute('height');
+        el.classList.add('embed-responsive-frame');
+        el.style.setProperty('width', '100%', 'important');
+        el.style.setProperty('max-width', '100%', 'important');
+        el.style.setProperty('height', 'clamp(360px, 72vh, 900px)', 'important');
+        el.style.setProperty('border', '0', 'important');
+        el.style.setProperty('box-sizing', 'border-box', 'important');
+      });
+      template.content.querySelectorAll('*').forEach((el) => {
+        el.removeAttribute('width');
+        if (el.hasAttribute('style')) {
+          const style = el.style;
+          style.removeProperty('width');
+          style.removeProperty('min-width');
+          style.removeProperty('max-width');
+          if (!['IFRAME', 'OBJECT', 'EMBED'].includes(el.tagName)) {
+            style.removeProperty('height');
+            style.removeProperty('min-height');
+            style.removeProperty('max-height');
+          }
+          el.setAttribute('style', style.cssText);
+        }
+        el.style.setProperty('max-width', '100%', 'important');
+        el.style.setProperty('box-sizing', 'border-box', 'important');
+      });
+      return template.innerHTML;
+    }
+
+    function renderExperiences() {
+      const container = document.getElementById('experiences-container');
+      container.innerHTML = '';
+
+      const list = currentData.experiencias || [];
+      if (!list.length) {
+        container.innerHTML = '<p class="text-xs text-gray-500 italic p-4 bg-white rounded-lg border">No hay experiencias interactivas registradas.</p>';
+        return;
+      }
+
+      list.forEach((exp, idx) => {
+        const card = document.createElement('div');
+        card.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 shadow-sm space-y-4';
+
+        if (exp.tipo === 'incrustado') {
+          card.innerHTML = `
+            <div class="flex items-center justify-between border-b border-[#DFCFC0] pb-2">
+              <div class="flex items-center gap-2">
+                <span class="bg-[#D96B43] text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded">Incrustado</span>
+                <h4 class="font-bold text-sm font-display text-[#1A1A1A]">${exp.experiencia || 'Recurso Interactivo'}</h4>
+              </div>
+            </div>
+            <p class="text-xs text-gray-600">${exp.descripcion || ''}</p>
+            <div class="experience-embed w-full max-w-full min-w-0 overflow-hidden rounded-lg" data-experience-embed="${idx}">
+              ${makeResponsiveEmbed(exp.embed || '<div class="p-4 bg-gray-200 text-xs text-center">Contenido incrustado no disponible</div>')}
+            </div>
+          `;
+        } else if (exp.tipo === 'galeria') {
+          if (!galleryViewModes[idx]) galleryViewModes[idx] = 'grid';
+          if (galleryCarouselIndices[idx] === undefined) galleryCarouselIndices[idx] = 0;
+
+          const images = Array.isArray(exp.url) ? exp.url : [];
+          const currentMode = galleryViewModes[idx];
+          const activeIndex = galleryCarouselIndices[idx];
+
+          let contentHtml = '';
+
+          if (currentMode === 'grid') {
+            const imgGridHtml = images.map((imgUrl, imgIdx) => `
+              <div class="aspect-video bg-[#E8E2D5] rounded-lg overflow-hidden border border-[#DFCFC0] group relative">
+                <img src="${imgUrl}" alt="Imagen ${imgIdx + 1}" class="img-fitted" onerror="this.onerror=null; this.src='https://placehold.co/600x400/E8E2D5/1A1A1A?text=Galeria+'+(${imgIdx+1});">
+              </div>
+            `).join('');
+
+            contentHtml = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">${imgGridHtml}</div>`;
+          } else {
+            const currentImg = images[activeIndex] || '';
+            contentHtml = `
+              <div class="relative bg-[#1A1A1A] rounded-xl overflow-hidden aspect-video max-h-96 flex items-center justify-center border border-gray-800">
+                <img src="${currentImg}" alt="Carousel image" class="max-h-full max-w-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x450/1A1A1A/FFFFFF?text=Imagen+'+(${activeIndex+1});">
+                <button onclick="changeCarouselIndex(${idx}, -1, ${images.length})" class="absolute left-3 bg-black/60 hover:bg-[#D96B43] text-white p-2 rounded-full text-xs transition-flat"><i class="fa-solid fa-chevron-left"></i></button>
+                <button onclick="changeCarouselIndex(${idx}, 1, ${images.length})" class="absolute right-3 bg-black/60 hover:bg-[#D96B43] text-white p-2 rounded-full text-xs transition-flat"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
+                  ${images.map((_, dotIdx) => `<span class="w-2 h-2 rounded-full ${dotIdx === activeIndex ? 'bg-[#D96B43]' : 'bg-white/40'}"></span>`).join('')}
+                </div>
+              </div>
+            `;
+          }
+
+          card.innerHTML = `
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFCFC0] pb-2">
+              <div class="flex items-center gap-2">
+                <span class="bg-[#1A1A1A] text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded">Galería</span>
+                <h4 class="font-bold text-sm font-display text-[#1A1A1A]">${exp.experiencia || 'Galería de Imágenes'}</h4>
+              </div>
+              <div class="inline-flex bg-[#E8E2D5] p-0.5 rounded-md text-[11px] font-semibold border border-[#DFCFC0]">
+                <button onclick="toggleGalleryView(${idx}, 'grid')" class="px-2.5 py-0.5 rounded ${currentMode === 'grid' ? 'bg-[#D96B43] text-white shadow-2xs' : 'text-gray-700 hover:text-black'}"><i class="fa-solid fa-border-all mr-1"></i> Retícula</button>
+                <button onclick="toggleGalleryView(${idx}, 'carousel')" class="px-2.5 py-0.5 rounded ${currentMode === 'carousel' ? 'bg-[#D96B43] text-white shadow-2xs' : 'text-gray-700 hover:text-black'}"><i class="fa-solid fa-images mr-1"></i> Carrusel</button>
+              </div>
+            </div>
+            ${contentHtml}
+          `;
+        }
+
+        container.appendChild(card);
+      });
+    }
+
+    function toggleGalleryView(expIdx, mode) {
+      galleryViewModes[expIdx] = mode;
+      renderExperiences();
+    }
+
+    function changeCarouselIndex(expIdx, direction, total) {
+      if (total <= 0) return;
+      let curr = galleryCarouselIndices[expIdx] || 0;
+      curr = (curr + direction + total) % total;
+      galleryCarouselIndices[expIdx] = curr;
+      renderExperiences();
+    }
+
+    function renderNarrativeConnections() {
+      const container = document.getElementById('narrative-connections-container');
+      container.innerHTML = '';
+
+      const connections = currentData.conexiones || [];
+      if (!connections.length) {
+        container.innerHTML = '<p class="text-xs text-gray-500 italic p-4 bg-white rounded-lg border col-span-3">No hay conexiones narrativas definidas.</p>';
+        return;
+      }
+
+      connections.forEach(conn => {
+        const card = document.createElement('div');
+        card.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-4 shadow-sm hover:border-[#D96B43] transition-flat flex flex-col justify-between space-y-3';
+
+        card.innerHTML = `
+          <div class="w-full h-32 sm:h-40 bg-[#E8E2D5] rounded-t-lg overflow-hidden border border-[#DFCFC0] mb-3 relative">
+            <img src="${conn.imagen || 'https://placehold.co'}" alt="${conn.plataforma}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co';">
+          </div>
+          <div class="px-1 mb-4 overflow-hidden">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-[#D96B43] bg-[#D96B43]/10 px-1.5 py-0.5 rounded inline-block">${conn.tipo || 'Recurso'}</span>
+            <h4 class="font-bold text-xs sm:text-sm text-[#1A1A1A] font-display mt-1.5 truncate">${conn.plataforma || 'Sin nombre'}</h4>
+          </div>
+          <a href="${conn.enlace || '#'}" target="_blank" rel="noopener noreferrer" class="w-full bg-[#E8E2D5] hover:bg-[#D96B43] text-[#1A1A1A] hover:text-white font-bold text-xs py-1.5 px-3 rounded text-center transition-flat flex items-center justify-center gap-1.5 border border-[#DFCFC0]">
+            <span>Acceder a la plataforma</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function renderDesignProcess() {
+      const container = document.getElementById('design-process-container');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const processData = currentData?.procesoDisenoMetodologia;
+
+      if (!processData) {
+        container.innerHTML = '<p class="text-xs text-gray-500 italic p-4 bg-white rounded-lg border col-span-3">No hay información del proceso de diseño especificada.</p>';
+        return;
+      }
+
+      const { inspiracion, metodologia, herramientas } = processData;
+
+      // Columna 1: Inspiración y Estética
+      const colInspiracion = document.createElement('div');
+      colInspiracion.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 shadow-sm space-y-3';
+      colInspiracion.innerHTML = `
+        <h4 class="font-bold text-sm font-display text-[#1A1A1A] flex items-center gap-2 border-b border-[#DFCFC0] pb-2">
+          <i class="fa-solid fa-lightbulb text-[#D96B43]"></i> Inspiración & Estética
+        </h4>
+        ${inspiracion?.palabraConcepto ? `<p class="text-xs text-gray-700 italic bg-white p-2.5 rounded border border-[#DFCFC0]">${escapeHTML(inspiracion.palabraConcepto)}</p>` : ''}
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-1">Referentes Clave:</span>
+          <ul class="list-disc list-inside text-xs text-gray-700 space-y-1">
+            ${Array.isArray(inspiracion?.referentes) ? inspiracion.referentes.map(ref => `<li>${escapeHTML(ref)}</li>`).join('') : '<li class="text-gray-400">Sin referentes</li>'}
+          </ul>
+        </div>
+        ${inspiracion?.moodboardUrl ? `
+          <a href="${inspiracion.moodboardUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#D96B43] hover:underline pt-2">
+            <i class="fa-solid fa-palette"></i> Ver Moodboard / Tablero <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          </a>` : ''}
+      `;
+
+      // Columna 2: Metodología y Fases
+      const colMetodologia = document.createElement('div');
+      colMetodologia.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 shadow-sm space-y-3';
+      colMetodologia.innerHTML = `
+        <h4 class="font-bold text-sm font-display text-[#1A1A1A] flex items-center gap-2 border-b border-[#DFCFC0] pb-2">
+          <i class="fa-solid fa-diagram-project text-[#D96B43]"></i> Metodología
+        </h4>
+        ${metodologia?.marcoframing ? `<p class="text-xs font-semibold text-[#1A1A1A]">Marco: <span class="font-normal text-gray-700">${escapeHTML(metodologia.marcoframing)}</span></p>` : ''}
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-1">Fases del Proceso:</span>
+          <ol class="list-decimal list-inside text-xs text-gray-700 space-y-1">
+            ${Array.isArray(metodologia?.fasesProceso) ? metodologia.fasesProceso.map(fase => `<li>${escapeHTML(fase)}</li>`).join('') : '<li class="text-gray-400">Sin fases</li>'}
+          </ol>
+        </div>
+      `;
+
+      // Columna 3: Herramientas Utilizadas
+      const colHerramientas = document.createElement('div');
+      colHerramientas.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 shadow-sm space-y-3';
+      let herramientasHtml = Array.isArray(herramientas) ? herramientas.map(h => `
+        <div>
+          <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 block">${escapeHTML(h.categoria)}</span>
+          <div class="flex flex-wrap gap-1 mt-1">
+            ${Array.isArray(h.items) ? h.items.map(item => `<span class="text-[11px] bg-white border border-[#DFCFC0] px-2 py-0.5 rounded font-medium text-gray-800">${escapeHTML(item)}</span>`).join('') : ''}
+          </div>
+        </div>
+      `).join('') : '<p class="text-xs text-gray-400">Sin herramientas registradas</p>';
+
+      colHerramientas.innerHTML = `
+        <h4 class="font-bold text-sm font-display text-[#1A1A1A] flex items-center gap-2 border-b border-[#DFCFC0] pb-2">
+          <i class="fa-solid fa-screwdriver-wrench text-[#D96B43]"></i> Herramientas Usadas
+        </h4>
+        <div class="space-y-2.5">${herramientasHtml}</div>
+      `;
+
+      container.appendChild(colInspiracion);
+      container.appendChild(colMetodologia);
+      container.appendChild(colHerramientas);
+    }
+
+    function switchMode(mode) {
+      const viewer = document.getElementById('view-project-visualizer');
+      const editor = document.getElementById('view-project-editor');
+      const btnViewer = document.getElementById('btn-view-mode');
+      const btnEditor = document.getElementById('btn-editor-mode');
+
+      if (mode === 'viewer') {
+        viewer.classList.remove('hidden');
+        editor.classList.add('hidden');
+        btnViewer.className = "px-3 py-1 text-xs font-semibold rounded-md transition-flat bg-[#D96B43] text-white";
+        btnEditor.className = "px-3 py-1 text-xs font-semibold rounded-md transition-flat text-[#E8E2D5] hover:text-white";
+      } else {
+        viewer.classList.add('hidden');
+        editor.classList.remove('hidden');
+        btnEditor.className = "px-3 py-1 text-xs font-semibold rounded-md transition-flat bg-[#D96B43] text-white";
+        btnViewer.className = "px-3 py-1 text-xs font-semibold rounded-md transition-flat text-[#E8E2D5] hover:text-white";
+      }
+    }
+
+    function updateJsonSyntaxStatus(isValid) {
+      const status = document.getElementById('json-syntax-status');
+      if (isValid) {
+        status.textContent = "Sintaxis Válida";
+        status.className = "text-xs text-emerald-600 font-medium";
+      } else {
+        status.textContent = "Sintaxis Inválida (Verificar)";
+        status.className = "text-xs text-rose-600 font-medium";
+      }
+    }
+
+    function applyEditorData() {
+      const raw = document.getElementById('json-textarea').value;
+      try {
+        const parsed = JSON.parse(raw);
+        loadProjectData(parsed, "Cambios aplicados correctamente al visualizador.");
+        switchMode('viewer');
+      } catch (e) {
+        updateJsonSyntaxStatus(false);
+        showNotification("No se pudieron aplicar los cambios. Error de sintaxis JSON: " + e.message, "error");
+      }
+    }
+
+    function loadDemoTemplate() {
+      document.getElementById('json-textarea').value = JSON.stringify(DEMO_PROJECT_DATA, null, 2);
+      applyEditorData();
+    }
+
+    function exportJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentData || DEMO_PROJECT_DATA, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", "story.json");
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showNotification("Archivo 'story.json' descargado con éxito.", "success");
+    }
+
+    function showNotification(message, type = "info") {
+      const banner = document.getElementById('notification-banner');
+      const content = document.getElementById('notification-content');
+      const msgSpan = document.getElementById('notification-message');
+
+      msgSpan.textContent = message;
+      banner.classList.remove('hidden');
+
+      if (type === 'error') {
+        content.className = "p-3 rounded-lg border text-sm flex items-center justify-between bg-rose-50 border-rose-200 text-rose-800";
+      } else if (type === 'success') {
+        content.className = "p-3 rounded-lg border text-sm flex items-center justify-between bg-emerald-50 border-emerald-200 text-emerald-800";
+      } else {
+        content.className = "p-3 rounded-lg border text-sm flex items-center justify-between bg-[#E8E2D5]/80 border-[#DFCFC0] text-[#1A1A1A]";
+      }
+    }
+
+    function dismissNotification() {
+      document.getElementById('notification-banner').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

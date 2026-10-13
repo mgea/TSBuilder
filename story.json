@@ -1,0 +1,130 @@
+{
+  "titulo": "Hollow Knight",
+  "descripcion": "Hollow Knight es un aclamado juego de acción y aventura en 2D de estilo Metroidvania, ambientado en el vasto y arruinado reino subterráneo de Hallownest. El jugador controla a un misterioso caballero silencioso que explora cavernas interconectadas, combate criaturas corrompidas por una plaga antigua y desentraña los oscuros secretos del reino caído.",
+  "palabrasClave": [
+    "Metroidvania",
+    "Indie",
+    "Acción",
+    "Exploración",
+    "Dark Fantasy"
+  ],
+  "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqV2NK459YHTKUPb3UA33jlu0VDEkVAV8j4yZgrJH7K-wyrsZJfaMuKD1F&s=10",
+  "grupo": "Team Cherry",
+  "autores": "Ari Gibson, William Pellen",
+  "fecha": "2017",
+  "version": "1.5.78",
+  "personajes": [
+    {
+      "nombre": "El Caballero (The Knight)",
+      "cita": "«Sin mente para pensar. Sin voluntad para quebrantar. Sin voz para clamar de sufrimiento...»",
+      "biografia": "Una Vasija creada a partir de la Unión del Rey Pálido y la Dama Blanca, imbuida con la sustancia del Vacío para contener la Infección. Abandonado en el Abismo, regresa al reino caído de Hallownest atraído por una llamada misteriosa.",
+      "objetivo": "Aventurarse en las profundidades de Hallownest, romper los sellos de los Soñadores y erradicar o contener la Infección que consume el reino.",
+      "conflicto": "Debe descubrir su verdadero origen en el Abismo y decidir si ocupará el lugar del Hollow Knight original o buscará poner fin definitivamente a la fuente de la plaga.",
+      "etiquetas": [
+        "Protagonista",
+        "Vasija",
+        "Silencioso",
+        "Guerrero"
+      ],
+      "url": "https://www.korosenai.es/wp-content/uploads/2019/02/lore-hollow-knight.jpg",
+      "alt": "Ilustración del Caballero sosteniendo su Aguijón en la penumbra de Hallownest",
+      "personalidad": "Completamente inexpresivo, estoico, determinado y silencioso.",
+      "motivacion": "Cumplir su propósito biológico y espiritual de purgar la Infección.",
+      "habilidades": "Dominio del Aguijón, hechizos de Alma (Espíritu Vengativo, Salto Desolador) e impulsos sombríos con el Vacío.",
+      "debilidades": "Vulnerabilidad a los daños físicos graves y dependencia de la recolección de Alma para curarse.",
+      "secreto": "Es una de las incontables Vasijas 'imperfectas' que cayeron al Abismo antes del éxito del Rey Pálido."
+    },
+    {
+      "nombre": "Hornet",
+      "cita": "«¡Git gud! Guardiana de las ruinas de Hallownest, pongo a prueba la fuerza de quienes buscan adentrarse.»",
+      "biografia": "La protectora de las ruinas de Hallownest y princesa-heredera nacida de la unión entre el Rey Pálido y Herrah la Bestia. Combate usando una aguja y un hilo de seda con una agilidad letal.",
+      "objetivo": "Evaluar la fuerza y determinación de los viajeros para asegurarse de que solo quien sea capaz de salvar el reino avance.",
+      "conflicto": "Se debate entre la pena por el trágico destino de su hogar y la responsabilidad implacable de proteger los secretos restantes de Hallownest.",
+      "etiquetas": [
+        "Protectora",
+        "Rival",
+        "Aliada",
+        "Jefa"
+      ],
+      "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQVNeO_3n_CWrGPOA1weqZIPwAx82ckKgoRjWOWMA8HUd9Mgrfh",
+      "alt": "Retrato de Hornet en su pose de combate sosteniendo su aguja",
+      "personalidad": "Orgullosa, perceptiva, ágil, severa pero justa.",
+      "motivacion": "Asegurar la supervivencia de Hallownest y probar si el Caballero posee la voluntad necesaria.",
+      "habilidades": "Ataques con aguja a distancia, acrobacias de alta velocidad y trampas de hilo de seda.",
+      "debilidades": "Su apego emocional hacia el destino trágico de su familia y su tierra.",
+      "secreto": "No es una Vasija del Vacío, sino una criatura viva con sangre real y linaje de los tejedores."
+    }
+  ],
+  "experiencias": [
+    {
+      "tipo": "incrustado",
+      "experiencia": "Banda Sonora Oficial (OST) - Hollow Knight",
+      "descripcion": "Reproductor interactivo para escuchar la melancólica y orquestal banda sonora compuesta por Christopher Larkin.",
+      "embed": "<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/album/43B98O33P2L58SFrvyR92t?utm_source=generator\" width=\"100%\" height=\"352\" frameborder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>"
+    },
+    {
+      "tipo": "galeria",
+      "experiencia": "Galería de Escenarios y Regiones de Hallownest",
+      "url": [
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcST0r4d4CHwVGgXUK4kkCwEZ97af1AE8YGz3voCni_OXbTypRKiZZGSa6c&s=10",
+        "https://m.media-amazon.com/images/I/61OHlxwbeJL._AC_UF894,1000_QL80_.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX7RoHo38vYP9gpiEpXRAnyhOSV3dW3P4bdJiz7u0-6w&s=10"
+      ]
+    }
+  ],
+  "conexiones": [
+    {
+      "plataforma": "Web Oficial de Hollow Knight",
+      "tipo": "Sitio Web Oficial",
+      "imagen": "https://images.squarespace-cdn.com/content/v1/606d159a953867291018f801/1617773200235-37F2RZTI6FCZ7Q2C27L0/logo_main.png?format=2500w",
+      "enlace": "https://www.hollowknight.com"
+    },
+    {
+      "plataforma": "Interactive Map",
+      "tipo": "Juego",
+      "imagen": "https://sm.ign.com/ign_za/image/h/hollow-kni/hollow-knight-interactive-map-is-now-available_kq3n.jpg",
+      "enlace": "https://scripterswar.com/hollowknight/map"
+    },
+    {
+      "plataforma": "Hollow Knight Game",
+      "tipo": "Juego online",
+      "imagen": "https://img.itch.zone/aW1nLzYwMzE2MjgucG5n/original/ItnoD5.png",
+      "enlace": "https://www.minijuegos.com/juego/hollow-knight-demake"
+    }
+  ],
+  "procesoDisenoMetodologia": {
+    "inspiracion": {
+      "referentes": [
+        "Estética Cyberpunk minimalista de Blade Runner 2049",
+        "Diseño editorial suizo (Grid-based layout)",
+        "Interface UI analógica e industrial de la saga Portal"
+      ],
+      "moodboardUrl": "https://pinterest.com/tu_tablero_moodboard",
+      "paletaColorConcepto": "Tonos tierra y terracota que evocan lo analógico frente a la frialdad del neón digital."
+    },
+    "metodologia": {
+      "marcoframing": "Design Thinking & Transmedia Storytelling Canvas",
+      "fasesProceso": [
+        "Investigación y Worldbuilding",
+        "Diseño de Arquetipos y Bibliotecas de Personajes",
+        "Prototipado de Experiencias Interactivas (H5P/Web)",
+        "Mapeo Multiplataforma y Distribución"
+      ]
+    },
+    "herramientas": [
+      {
+        "categoria": "Diseño UI/UX",
+        "items": ["Figma", "Adobe Illustrator"]
+      },
+      {
+        "categoria": "Desarrollo & Prototipado",
+        "items": ["Tailwind CSS", "Vanilla JavaScript", "H5P"]
+      },
+      {
+        "categoria": "Gestión & Documentación",
+        "items": ["GitHub", "Notion"]
+      }
+    ]
+  }
+
+}
