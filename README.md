@@ -1,27 +1,33 @@
-# TSB Transmedia Story Builder 
+# TSB: Transmedia Story Builder 
 
 **TSBuilder** 1.0 CCBY mgea, 12/10/2026 
 
- <img src="TCBuilder_logo.png" alt="TSBuilder" style="zoom:50%;" />
+ <img src="TSBuilder_logo.png" alt="TSBuilder" style="zoom:50%;" />
 
 Plataforma ligera para la gestión, visualización y diseño de proyectos de narrativa transmedia 
 
 Contiene:  
 
-* Browser para catálogos de proyectos (que se almacenan en carpetas con formato JSON)
-* TSB que es un visualizador de una sola ficha 
-* story.json (ejemplo de ficha)
+* ``index.html`` Browser para catálogos de proyectos (que se almacenan en carpetas con formato JSON)
+* ``TSB.html`` que es un visualizador de una sola ficha 
+* ``story.json`` (ejemplo de ficha)
 
-Usado en Creatividad e Innovación Audiovisual (Grado en Comunicación Audiovisual) edición 2026/27
+Usado en [Creatividad e Innovación Audiovisual](https://github.com/mgea/criav) (Grado en Comunicación Audiovisual) edición 2026/27
 
 
 
-## 1. Objetivo y Funcionamiento Interno
+## 1. Objetivo y Funcionamiento
 
-### Objetivo del Proyecto
-El objetivo principal de **TSB Transmedia StoryBuilder** es proporcionar a creadores audiovisuales, narradores y equipos transmedia una herramienta accesible, estructurada y visual para centralizar el diseño de sus universos narrativos. Permite articular en un único espacio interactivo la descripción del proyecto, la ficha de los autores/colectivos, las biografías y perfiles psicológicos de los personajes, los módulos interactivos embebidos y la red de conexiones multiplataforma (podcasts, cómics, videojuegos, ARGs, etc.).
+### Objetivo 
+El objetivo principal de **TSB Transmedia StoryBuilder** es proporcionar una herramienta sencilla para  centralizar el diseño de sus universos narrativos. Con un planteamiento similar (pero más simplificado) a una Biblia transmedia, lo que hace es recoger todo el universo de la narrativa, centrandose en los personajes y los productos desarrollados. 
 
-### Funcionamiento Interno
+Permite articular en un único espacio la descripción del proyecto, la ficha de los autores/colectivos, las biografías y perfiles psicológicos de los personajes, los módulos interactivos embebidos y la red de conexiones multiplataforma (podcasts, cómics, videojuegos, ARGs, etc.).
+
+Actualmente se utiliza en la Asignatura *Creatividad e Innovación Audiovisual* para el diseño de personajes, histórias y productos, así como la descripcion del proceso creativo. Los repositorios de proyectos están en https://github.com/mgea/storytelling Todo el contenido se almacena en fichas en formato JSON
+
+ 
+
+### Funcionamiento
 El funcionamiento del sistema se basa en un paradigma **data-driven** (guiado por datos):
 
 * **Procesamiento de Datos (JSON):** La aplicación utiliza una estructura de datos estándar definida en un archivo `story.json`. Al iniciar, la aplicación intenta realizar una lectura automática (`fetch`) de este fichero en la raíz del proyecto.
@@ -138,6 +144,6 @@ Objeto que documenta las fuentes de inspiración, el marco de trabajo y la pila 
 
 -----
 
-Creatividad e Innovacion Audiovisual 
+TSBuilder es un proyecto para Creatividad e Innovacion Audiovisual 
 
-Miguel Gea, 2026
+CCBY Miguel Gea, 2026
