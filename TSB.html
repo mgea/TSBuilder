@@ -390,43 +390,42 @@
 
   <!-- ==================== JAVASCRIPT APP LOGIC ==================== -->
   <script>
+   
     // Embedded Default Demo Data
     const DEMO_PROJECT_DATA = {
-      "titulo": "Nora y la Red Invisible",
+      "titulo": "Kinera-3 y la innovación creativa",
       "descripcion": "Un proyecto transmedia de misterio y tecno-ficción que explora la desconexión social y el control algorítmico en una metrópolis hiperconectada. La narrativa se expande mediante episodios interactivos, ciber-novelas, un podcast argumental y experiencias de realidad alternativa (ARG).",
-      "palabrasClave": ["Ficción", "Sci-Fi", "Misterio", "Realidad Alternativa", "Cyberpunk", "Cómic Interactivo"],
-      "imagen": "assets/nora_logo.png",
+      "palabrasClave": ["Ficción", "Realidad Alternativa", "Cyberpunk", "Cómic"],
+      "imagen": "https://github.com/mgea/CRIAv/blob/main/_logo_instagram_criav.png?raw=true",
       "grupo": "Colectivo Transmedia UGR - Grupo 04",
-      "autores": "Miguel Gea, Elena Valenzuela & Lucas Romero",
+      "autores": "Miguel Gea",
       "fecha": "2026",
       "version": "1.5",
       "RRSS": [
-        { "nombre": "Twitter", "link": "https://twitter.com", "img": "" },
-        { "nombre": "Instagram", "link": "https://instagram.com", "img": "" },
+        { "nombre": "Twitter", "link": "https://twitter.com/Neonarrativas", "img": "" },
+        { "nombre": "Instagram", "link": "https://instagram.com/Neonarrativas", "img": "" },
         { "nombre": "YouTube", "link": "https://youtube.com", "img": "" },
-        { "nombre": "GitHub", "link": "https://github.com/mgea", "img": "" },
-        { "nombre": "Web Oficial", "link": "https://ugr.es", "img": "" }
+        { "nombre": "GitHub", "link": "https://github.com/mgea/storytelling", "img": "" },
+        { "nombre": "Web Oficial", "link": "https://github.com/mgea/criav", "img": "" }
       ],
       "Avatar": [
-        { "nombre": "Miguel Gea", "link": "https://github.com/mgea", "img": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
-        { "nombre": "Elena Valenzuela", "link": "#", "img": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
-        { "nombre": "Lucas Romero", "link": "#", "img": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+        { "nombre": "Miguel Gea", "link": "https://github.com/mgea", "img": "https://avatars.githubusercontent.com/u/32359091?v=4" },
       ],
       "personajes": [
         {
-          "nombre": "Nora Vance",
-          "cita": "«Si no estás en el algoritmo, eres libre... pero si eres libre, no existes para el sistema.»",
-          "biografia": "Antigua ingeniera de datos de Synapse Corp. Tras descubrir una anomalía informática que borraba identidades digitales reales de ciudadanos vulnerables, decidió aislarse de la red principal y operar como activista 'fantasma' en los suburbios analógicos.",
-          "objetivo": "Desmantelar el protocolo de supresión de memoria digital de Synapse Corp y revelar la verdad detrás del 'Gran Apagón de Datos' que borró a su familia.",
-          "conflicto": "Debe arriesgar su propio anonimato al conectarse a terminales públicas infectadas, mientras lucha contra un implante neuronal defectuoso que deteriora progresivamente sus recuerdos.",
-          "etiquetas": ["Protagonista", "Hacker", "Exiliada", "Tecno-activista"],
-          "url": "assets/nora.jpg",
-          "alt": "Retrato de Nora Vance con chaqueta oscura y mirada fija entre destellos de luz de terminales digitales",
-          "personalidad": "Introvertida, metódica, sumamente observadora y pragmática. Mantiene una desconfianza sistemática hacia las corporaciones.",
-          "motivacion": "El deseo irrenunciable de justicia y el anhelo de recuperar los recuerdos borrados de sus seres queridos.",
-          "habilidades": "Criptografía avanzada, ingeniería inversa de software, supervivencia urbana analógica.",
-          "debilidades": "Dificultad severa para confiar en otras personas, migrañas inducidas por sobrecarga sensorial tecnológica.",
-          "secreto": "Conserva el único fragmento de código fuente original capaz de apagar permanentemente la IA central de la ciudad."
+          "nombre": "FedeCatBot",
+          "cita": "«Humano tenía que ser»",
+          "biografia": "FedeCatBot nació bajo la influencia de GodFather, el creador de Chatbot de Telegram, quería convertirse en tu amigo de Telegram",
+          "objetivo": "Dar pistas para saber cómo enfocar tu proyecto creativo",
+          "conflicto": "Tiene mal carácter si le llevas la contraria",
+          "etiquetas": ["Protagonista", "Hacker", "ChatBot", "Telegram"],
+          "url": "ahttps://github.com/mgea/CRIAv/blob/main/recursos/fedecatbot/fedeCat_mini.png?raw=true",
+          "alt": "Bot FedeCatBot",
+          "personalidad": "Irónico y con mal carácter. Nacido bajo la influencia de Garfield",
+          "motivacion": "Descubrir la invasión de Gatos-Robot en la Facultad",
+          "habilidades": "Le gusta usar citas de películas para dar consejos",
+          "debilidades": "No soporta las pelis de Kubrick",
+          "secreto": "En realidad quiere ayudarte a hacer tus proyectos"
         },
         {
           "nombre": "Dante Reyes",
@@ -447,9 +446,10 @@
       "experiencias": [
         {
           "tipo": "incrustado",
-          "experiencia": "Interactivo H5P: Test de Lealtad Digital",
-          "descripcion": "Experiencia interactiva que simula un cuestionario de evaluación psicológica de Synapse Corp para sumergir al usuario en la atmósfera del universo.",
-          "embed": "<div class=\"w-full h-48 bg-[#1A1A1A] text-[#F9F6F0] rounded-lg p-6 flex flex-col justify-center items-center text-center border border-[#D96B43]/40\"><i class=\"fa-solid fa-gamepad text-3xl text-[#D96B43] mb-2\"></i><h4 class=\"font-bold font-display text-lg\">Simulador Interactivo H5P</h4><p class=\"text-xs text-gray-400 max-w-md mt-1\">Cargando módulo interactivo de toma de decisiones... (Representación embebida de recurso H5P)</p><button onclick=\"alert('Módulo H5P ejecutado en modo demostración.')\" class=\"mt-3 bg-[#D96B43] hover:bg-[#C85A32] text-white text-xs px-4 py-1.5 rounded font-semibold\">Iniciar Cuestionario</button></div>"
+          "experiencia": "Interactivo H5P: Test de Personalidad",
+          "descripcion": "Experiencia interactiva para conocer qué personaje de Star Wars eres",
+          "embed": " <iframe src=\"https://h5p.org/h5p/embed/1076188\" width=\"1090\" height=\"479\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\" allow=\"geolocation *; microphone *; camera *; midi *; encrypted-media *\" title=\"Quizz Personalidad: Star Wars\"><\/iframe><script src=\"https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js\" charset=\"UTF-8\"><\/script>"
+
         },
         {
           "tipo": "galeria",

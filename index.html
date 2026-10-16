@@ -6,12 +6,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browser+TSBuilder v1.0 </title>
+  <title>Browser+TSBuilder v1.0</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans for geometric flat design typography -->
+  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -50,6 +50,7 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: #F9F6F0;
       color: #1A1A1A;
+      font-size: 15px; /* Ligeramente aumentado desde el estándar de 14px */
     }
     h1, h2, h3, h4, .font-display {
       font-family: 'Space Grotesk', sans-serif;
@@ -76,13 +77,13 @@
       scrollbar-width: none;
     }
 
-    /* Experiencias embebidas: neutraliza dimensiones fijas típicas de H5P. */
+    /* Experiencias embebidas */
     #experiences-container { width: 100%; max-width: 100%; min-width: 0; }
     #experiences-container > * { min-width: 0; max-width: 100%; }
     .experience-embed { width: 100%; max-width: 100%; min-width: 0; overflow: hidden; }
     .experience-embed .embed-responsive-frame {
       display: block !important; width: 100% !important; max-width: 100% !important;
-      height: clamp(360px, 72vh, 900px) !important; min-height: 320px !important;
+      height: clamp(380px, 72vh, 900px) !important; min-height: 340px !important;
       border: 0 !important; box-sizing: border-box !important;
     }
     .experience-embed iframe, .experience-embed object, .experience-embed embed,
@@ -97,7 +98,7 @@
       max-width: 100% !important;
     }
     @media (max-width: 640px) {
-      .experience-embed .embed-responsive-frame { height: 72vh !important; min-height: 300px !important; }
+      .experience-embed .embed-responsive-frame { height: 72vh !important; min-height: 320px !important; }
     }
   </style>
 </head>
@@ -105,22 +106,22 @@
 
   <!-- ==================== HEADER BLOCK ==================== -->
   <header class="bg-[#1A1A1A] text-[#F9F6F0] border-b-4 border-[#D96B43] sticky top-0 z-40 shadow-md">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         
         <!-- Logo & Main Title -->
         <div class="flex items-center space-x-3.5">
           <div class="w-12 h-12 bg-[#000] rounded-lg overflow-hidden flex items-center justify-center p-1 border border-white/20 shrink-0">
-            <img src="TSBuilder_logo.png" alt="TSB Logo" class="w-full h-full rounded-lg" 
-                 onerror="this.onerror=null; this.src='https://placehold.co/100x100/D96B43/FFFFFF?text=TSB';">
+            <img src="./TSBuilder_logo_mini.png" alt="TCB Logo" class="w-full h-full object-contain" 
+                 onerror="this.onerror=null; this.src='https://placehold.co/100x100/D96B43/FFFFFF?text=TCB';">
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <h1 class="text-base sm:text-lg font-bold font-display tracking-tight leading-tight text-white">
+              <h1 class="text-lg sm:text-xl font-bold font-display tracking-tight leading-tight text-white">
                 Proyecto de Storytelling transmedial
               </h1>
             </div>
-            <p class="text-xs text-[#E8E2D5]/80 font-light hidden sm:block">Plataforma de gestión, visualización y diseño de narrativas transmedia</p>
+            <p class="text-xs sm:text-sm text-[#E8E2D5]/80 font-light hidden sm:block">Plataforma de gestión, visualización y diseño de narrativas transmedia</p>
           </div>
         </div>
 
@@ -128,29 +129,30 @@
         <div class="flex flex-wrap items-center gap-2 sm:gap-3">
           
           <!-- Browser de fichas transmedia -->
-          <label class="relative cursor-pointer border border-[#D96B43] bg-[#D96B43] hover:bg-[#C85A32] text-white px-3 py-1.5 rounded-md transition-flat flex items-center gap-2 text-xs font-semibold">
+          <label class="relative cursor-pointer border border-[#D96B43] bg-[#D96B43] hover:bg-[#C85A32] text-white px-3.5 py-2 rounded-md transition-flat flex items-center gap-2 text-xs sm:text-sm font-semibold">
             <i class="fa-solid fa-folder-open"></i><span>Explorar fichas</span>
             <input id="folder-input" type="file" accept=".json,application/json" webkitdirectory directory multiple class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" aria-label="Seleccionar carpeta de fichas JSON">
           </label>
+
           <!-- Dropzone Button -->
-          <div id="drop-zone" class="relative group cursor-pointer border-2 border-dashed border-[#E8E2D5]/40 hover:border-[#D96B43] bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-md transition-flat flex items-center gap-2">
+          <div id="drop-zone" class="relative group cursor-pointer border-2 border-dashed border-[#E8E2D5]/40 hover:border-[#D96B43] bg-white/5 hover:bg-white/10 px-3.5 py-2 rounded-md transition-flat flex items-center gap-2">
             <i class="fa-solid fa-file-arrow-up text-[#D96B43]"></i>
-            <span class="text-xs font-medium text-[#E8E2D5] group-hover:text-white">Abrir proyecto</span>
+            <span class="text-xs sm:text-sm font-medium text-[#E8E2D5] group-hover:text-white">Abrir proyecto</span>
             <input type="file" id="json-file-input" accept=".json" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full" />
           </div>
 
           <!-- View Switcher -->
           <div class="inline-flex bg-black/40 p-1 rounded-lg border border-white/10">
-            <button id="btn-view-mode" onclick="switchMode('viewer')" class="px-3 py-1 text-xs font-semibold rounded-md transition-flat bg-[#D96B43] text-white">
+            <button id="btn-view-mode" onclick="switchMode('viewer')" class="px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md transition-flat bg-[#D96B43] text-white">
               <i class="fa-solid fa-eye mr-1"></i> 
             </button>
-            <button id="btn-editor-mode" onclick="switchMode('editor')" class="px-3 py-1 text-xs font-semibold rounded-md transition-flat text-[#E8E2D5] hover:text-white">
+            <button id="btn-editor-mode" onclick="switchMode('editor')" class="px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md transition-flat text-[#E8E2D5] hover:text-white">
               <i class="fa-solid fa-pen-to-square mr-1"></i> 
             </button>
           </div>
 
           <!-- Export Button -->
-          <button onclick="exportJSON()" class="bg-[#E8E2D5] hover:bg-white text-[#1A1A1A] font-bold text-xs px-3 py-1.5 rounded-md border border-black/20 flex items-center gap-1.5 transition-flat">
+          <button onclick="exportJSON()" class="bg-[#E8E2D5] hover:bg-white text-[#1A1A1A] font-bold text-xs sm:text-sm px-3.5 py-2 rounded-md border border-black/20 flex items-center gap-1.5 transition-flat" title="Exportar JSON">
             <i class="fa-solid fa-download text-[#D96B43]"></i>
           </button>
         </div>
@@ -161,7 +163,7 @@
 
   <!-- Notification Banner for errors or status -->
   <div id="notification-banner" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
-    <div id="notification-content" class="p-3 rounded-lg border text-sm flex items-center justify-between">
+    <div id="notification-content" class="p-3.5 rounded-lg border text-sm flex items-center justify-between">
       <span id="notification-message"></span>
       <button onclick="dismissNotification()" class="text-xs ml-4 underline font-semibold">Cerrar</button>
     </div>
@@ -176,61 +178,60 @@
         <div class="absolute top-0 left-0 right-0 h-1.5 bg-[#D96B43]"></div>
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5">
           <div>
-            <p class="text-xs font-bold uppercase tracking-[.2em] text-[#D96B43] mb-2">Archivo transmedia</p>
+            <p class="text-xs sm:text-sm font-bold uppercase tracking-[.2em] text-[#D96B43] mb-2">Archivo transmedia</p>
             <h2 class="text-3xl sm:text-4xl font-extrabold font-display tracking-tight">Explorador de proyectos</h2>
-            <p class="mt-2 text-sm text-gray-600 max-w-2xl">Explora las fichas TSC Builder como una biblioteca de proyectos. Selecciona una carpeta con archivos JSON para construir tu catálogo local.</p>
+            <p class="mt-2 text-sm sm:text-base text-gray-700 max-w-2xl leading-relaxed">Explora las fichas TSC Builder como una biblioteca de proyectos. Selecciona una carpeta con archivos JSON para construir tu catálogo local.</p>
           </div>
-          <label class="shrink-0 cursor-pointer bg-[#1A1A1A] hover:bg-[#D96B43] text-white font-bold text-sm px-4 py-3 rounded-lg transition-flat flex items-center justify-center gap-2">
+          <label class="shrink-0 cursor-pointer bg-[#1A1A1A] hover:bg-[#D96B43] text-white font-bold text-sm px-5 py-3 rounded-lg transition-flat flex items-center justify-center gap-2">
             <i class="fa-solid fa-folder-tree"></i> Cargar carpeta de fichas
             <input id="folder-input-main" type="file" accept=".json,application/json" webkitdirectory directory multiple class="hidden">
           </label>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-7">
-          <div class="bg-white border border-[#E8E2D5] rounded-lg p-4"><p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Proyectos en catálogo</p><p id="browser-count" class="font-display text-2xl font-bold mt-1">1</p></div>
-          <div class="bg-white border border-[#E8E2D5] rounded-lg p-4"><p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Años disponibles</p><p id="browser-years" class="font-display text-2xl font-bold mt-1">1</p></div>
-          <div class="bg-white border border-[#E8E2D5] rounded-lg p-4"><p class="text-xs text-gray-500 uppercase tracking-wider font-bold">Categorías / etiquetas</p><p id="browser-tags-count" class="font-display text-2xl font-bold mt-1">6</p></div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mt-7">
+          <div class="bg-white border border-[#E8E2D5] rounded-lg p-4"><p class="text-xs sm:text-sm text-gray-600 uppercase tracking-wider font-bold">Proyectos en catálogo</p><p id="browser-count" class="font-display text-2xl sm:text-3xl font-bold mt-1">1</p></div>
+          <div class="bg-white border border-[#E8E2D5] rounded-lg p-4"><p class="text-xs sm:text-sm text-gray-600 uppercase tracking-wider font-bold">Años disponibles</p><p id="browser-years" class="font-display text-2xl sm:text-3xl font-bold mt-1">1</p></div>
+          <div class="bg-white border border-[#E8E2D5] rounded-lg p-4"><p class="text-xs sm:text-sm text-gray-600 uppercase tracking-wider font-bold">Categorías / etiquetas</p><p id="browser-tags-count" class="font-display text-2xl sm:text-3xl font-bold mt-1">6</p></div>
         </div>
       </div>
 
       <div class="bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-4 md:p-5 shadow-sm">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-3">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-3.5">
           <div class="md:col-span-5 relative">
-            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
-            <input id="browser-search" type="search" placeholder="Buscar por título, grupo, autor o palabra clave…" class="w-full pl-9 pr-3 py-2.5 rounded-lg border border-[#DFCFC0] bg-white text-sm focus:outline-none focus:ring-2 focus:ring-[#D96B43]">
+            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-base"></i>
+            <input id="browser-search" type="search" placeholder="Buscar por título, grupo, autor o palabra clave…" class="w-full pl-10 pr-3.5 py-2.5 rounded-lg border border-[#DFCFC0] bg-white text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-[#D96B43]">
           </div>
           <div class="md:col-span-3">
-            <select id="browser-tag-filter" class="w-full py-2.5 px-3 rounded-lg border border-[#DFCFC0] bg-white text-sm"><option value="">Todas las palabras clave</option></select>
+            <select id="browser-tag-filter" class="w-full py-2.5 px-3.5 rounded-lg border border-[#DFCFC0] bg-white text-sm sm:text-base"><option value="">Todas las palabras clave</option></select>
           </div>
           <div class="md:col-span-2">
-            <select id="browser-year-filter" class="w-full py-2.5 px-3 rounded-lg border border-[#DFCFC0] bg-white text-sm"><option value="">Todos los años</option></select>
+            <select id="browser-year-filter" class="w-full py-2.5 px-3.5 rounded-lg border border-[#DFCFC0] bg-white text-sm sm:text-base"><option value="">Todos los años</option></select>
           </div>
           <div class="md:col-span-2">
-            <select id="browser-sort" class="w-full py-2.5 px-3 rounded-lg border border-[#DFCFC0] bg-white text-sm" aria-label="Ordenar proyectos">
+            <select id="browser-sort" class="w-full py-2.5 px-3.5 rounded-lg border border-[#DFCFC0] bg-white text-sm sm:text-base" aria-label="Ordenar proyectos">
               <option value="title">A–Z</option><option value="year-desc">Año: reciente</option><option value="year-asc">Año: antiguo</option><option value="tag">Palabra clave</option>
             </select>
           </div>
         </div>
         <div class="flex flex-wrap items-center justify-between gap-2 mt-4">
-          <p id="browser-results-label" class="text-xs text-gray-500">Mostrando proyectos</p>
-          <button id="browser-reset" class="text-xs font-bold text-[#C85A32] hover:underline"><i class="fa-solid fa-rotate-left mr-1"></i>Limpiar filtros</button>
+          <p id="browser-results-label" class="text-xs sm:text-sm text-gray-600">Mostrando proyectos</p>
+          <button id="browser-reset" class="text-xs sm:text-sm font-bold text-[#C85A32] hover:underline"><i class="fa-solid fa-rotate-left mr-1"></i>Limpiar filtros</button>
         </div>
       </div>
       <div id="browser-cards" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5"></div>
       <div id="browser-empty" class="hidden bg-white border border-dashed border-[#DFCFC0] rounded-xl p-10 text-center">
         <i class="fa-solid fa-folder-open text-3xl text-[#D96B43]"></i>
         <h3 class="font-display font-bold text-xl mt-3">No se encontraron fichas</h3>
-        <p class="text-sm text-gray-500 mt-1">Prueba a cambiar los filtros o carga una carpeta que contenga archivos .json de TSC Builder.</p>
+        <p class="text-sm sm:text-base text-gray-600 mt-1">Prueba a cambiar los filtros o carga una carpeta que contenga archivos .json de TSC Builder.</p>
       </div>
-      <p class="text-[11px] text-gray-500 leading-relaxed"><i class="fa-solid fa-circle-info mr-1 text-[#D96B43]"></i>La carpeta se lee localmente en tu navegador; los archivos no se suben a un servidor. Se buscan fichas JSON y se ignoran los archivos que no tengan una estructura de proyecto.</p>
+      <p class="text-xs sm:text-sm text-gray-600 leading-relaxed"><i class="fa-solid fa-circle-info mr-1 text-[#D96B43]"></i>La carpeta se lee localmente en tu navegador; los archivos no se suben a un servidor. Se buscan fichas JSON y se ignoran los archivos que no tengan una estructura de proyecto.</p>
     </section>
 
     <!-- ==================== VIEW 1: PROJECT VISUALIZER ==================== -->
     <div id="view-project-visualizer" class="space-y-10 hidden">
-      <button id="browser-back" class="inline-flex items-center gap-2 text-sm font-bold text-[#C85A32] hover:underline"><i class="fa-solid fa-arrow-left"></i> Volver al explorador</button>
+      <button id="browser-back" class="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-[#C85A32] hover:underline"><i class="fa-solid fa-arrow-left"></i> Volver al explorador</button>
       
       <!----------- BLOQUE PROYECTO --------------->
       <section class="bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-6 md:p-8 shadow-sm relative overflow-hidden">
-        <!-- Accent decorative bar -->
         <div class="absolute top-0 left-0 right-0 h-1.5 bg-[#D96B43]"></div>
 
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
@@ -253,10 +254,10 @@
             
             <div>
               <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-                <span class="text-xs font-bold uppercase tracking-widest text-[#D96B43] bg-[#D96B43]/10 px-2.5 py-1 rounded-md border border-[#D96B43]/20">
+                <span class="text-xs sm:text-sm font-bold uppercase tracking-widest text-[#D96B43] bg-[#D96B43]/10 px-3 py-1 rounded-md border border-[#D96B43]/20">
                   <i class="fa-solid fa-cube mr-1"></i> Ficha Transmedia v<span id="project-version">1.5</span>
                 </span>
-                <span id="project-date" class="text-xs font-medium text-gray-500 bg-[#E8E2D5]/50 px-3 py-1 rounded-full border border-[#DFCFC0]">
+                <span id="project-date" class="text-xs sm:text-sm font-medium text-gray-600 bg-[#E8E2D5]/50 px-3.5 py-1 rounded-full border border-[#DFCFC0]">
                   Año: --
                 </span>
               </div>
@@ -265,30 +266,30 @@
                 Cargando título del proyecto...
               </h2>
 
-              <p id="project-description" class="mt-3 text-sm sm:text-base text-gray-700 leading-relaxed max-w-4xl font-normal">
+              <p id="project-description" class="mt-3.5 text-base sm:text-lg text-gray-800 leading-relaxed max-w-4xl font-normal">
                 Cargando descripción detallada...
               </p>
             </div>
 
             <!-- Keywords Badges -->
             <div>
-              <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Palabras clave & Categorías</h4>
-              <div id="project-keywords" class="flex flex-wrap gap-1.5 sm:gap-2">
+              <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-600 mb-2">Palabras clave & Categorías</h4>
+              <div id="project-keywords" class="flex flex-wrap gap-2">
                 <!-- Badges populated dynamically -->
               </div>
             </div>
 
             <!-- Authors, Group, RRSS & Avatars Grid Layout -->
-            <div class="pt-4 border-t border-[#DFCFC0]/60 grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-gray-600">
+            <div class="pt-4 border-t border-[#DFCFC0]/60 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-700">
               
               <!-- Columna Izquierda: Grupo + RRSS -->
               <div class="space-y-2">
                 <div>
                   <span class="font-bold text-[#1A1A1A]">Grupo / Colectivo:</span> 
-                  <span id="project-group" class="block font-medium text-sm text-[#1A1A1A] mt-0.5">--</span>
+                  <span id="project-group" class="block font-semibold text-base text-[#1A1A1A] mt-0.5">--</span>
                 </div>
                 <div id="project-rrss-section" class="pt-1">
-                  <div id="project-rrss-container" class="flex flex-wrap gap-2.5 items-center mt-1">
+                  <div id="project-rrss-container" class="flex flex-wrap gap-3 items-center mt-1">
                     <!-- RRSS inyectadas en JS -->
                   </div>
                 </div>
@@ -298,10 +299,10 @@
               <div class="space-y-2">
                 <div>
                   <span class="font-bold text-[#1A1A1A]">Autores/as:</span> 
-                  <span id="project-authors" class="block font-medium text-sm text-[#1A1A1A] mt-0.5">--</span>
+                  <span id="project-authors" class="block font-semibold text-base text-[#1A1A1A] mt-0.5">--</span>
                 </div>
                 <div id="project-avatar-section" class="pt-1">
-                  <div id="project-avatar-container" class="flex flex-wrap gap-2.5 items-center mt-1">
+                  <div id="project-avatar-container" class="flex flex-wrap gap-3 items-center mt-1">
                     <!-- Avatares inyectados en JS -->
                   </div>
                 </div>
@@ -319,8 +320,8 @@
         <!-- Section Header & Character Selector Navigation -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DFCFC0] pb-3">
           <div class="flex items-center gap-2">
-            <div class="w-3 h-6 bg-[#D96B43] rounded-sm"></div>
-            <h3 class="text-xl sm:text-2xl font-bold font-display text-[#1A1A1A]">Fichas de Personajes</h3>
+            <div class="w-3.5 h-7 bg-[#D96B43] rounded-sm"></div>
+            <h3 class="text-2xl sm:text-3xl font-bold font-display text-[#1A1A1A]">Fichas de Personajes</h3>
           </div>
           
           <!-- Character Nav Tabs -->
@@ -339,8 +340,8 @@
       <!-- BLOQUE EXPERIENCIAS INTERACTIVAS -->
       <section class="space-y-4 pt-4 border-t border-[#DFCFC0]">
         <div class="flex items-center gap-2 mb-2">
-          <div class="w-3 h-6 bg-[#D96B43] rounded-sm"></div>
-          <h3 class="text-xl sm:text-2xl font-bold font-display text-[#1A1A1A]">Experiencias Interactivas & Multimedia</h3>
+          <div class="w-3.5 h-7 bg-[#D96B43] rounded-sm"></div>
+          <h3 class="text-2xl sm:text-3xl font-bold font-display text-[#1A1A1A]">Experiencias Interactivas & Multimedia</h3>
         </div>
 
         <div id="experiences-container" class="w-full max-w-full min-w-0 mx-auto grid grid-cols-1 gap-6"></div>
@@ -350,10 +351,10 @@
       <!---------- BLOQUE MAPA DE CONEXIONES NARRATIVAS ------------>
       <section class="space-y-4 pt-4 border-t border-[#DFCFC0]">
         <div class="flex items-center gap-2 mb-2">
-          <div class="w-3 h-6 bg-[#D96B43] rounded-sm"></div>
+          <div class="w-3.5 h-7 bg-[#D96B43] rounded-sm"></div>
           <div>
-            <h3 class="text-xl sm:text-2xl font-bold font-display text-[#1A1A1A]">Mapa de Conexiones Narrativas</h3>
-            <p class="text-xs text-gray-600">Extensión del universo transmedia y enlaces a otros formatos del proyecto</p>
+            <h3 class="text-2xl sm:text-3xl font-bold font-display text-[#1A1A1A]">Mapa de Conexiones Narrativas</h3>
+            <p class="text-xs sm:text-sm text-gray-700">Extensión del universo transmedia y enlaces a otros formatos del proyecto</p>
           </div>
         </div>
 
@@ -365,10 +366,10 @@
       <!---------- BLOQUE PROCESO DE DISEÑO & METODOLOGÍA ------------>
       <section class="space-y-4 pt-4 border-t border-[#DFCFC0]">
         <div class="flex items-center gap-2 mb-2">
-          <div class="w-3 h-6 bg-[#D96B43] rounded-sm"></div>
+          <div class="w-3.5 h-7 bg-[#D96B43] rounded-sm"></div>
           <div>
-            <h3 class="text-xl sm:text-2xl font-bold font-display text-[#1A1A1A]">Proceso de Diseño & Metodología</h3>
-            <p class="text-xs text-gray-600">Inspiración, referencias visuales, herramientas y flujo de desarrollo</p>
+            <h3 class="text-2xl sm:text-3xl font-bold font-display text-[#1A1A1A]">Proceso de Diseño & Metodología</h3>
+            <p class="text-xs sm:text-sm text-gray-700">Inspiración, referencias visuales, herramientas y flujo de desarrollo</p>
           </div>
         </div>
 
@@ -385,15 +386,15 @@
       <div class="bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-6 shadow-sm">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#DFCFC0] pb-4 mb-6">
           <div>
-            <h2 class="text-2xl font-bold font-display text-[#1A1A1A]">Editor y Creador de Ficha JSON</h2>
-            <p class="text-xs text-gray-600">Crea o modifica la plantilla transmedia en formato JSON e insértala directamente en la vista.</p>
+            <h2 class="text-2xl sm:text-3xl font-bold font-display text-[#1A1A1A]">Editor y Creador de Ficha JSON</h2>
+            <p class="text-xs sm:text-sm text-gray-700">Crea o modifica la plantilla transmedia en formato JSON e insértala directamente en la vista.</p>
           </div>
 
           <div class="flex flex-wrap items-center gap-2">
-            <button onclick="loadDemoTemplate()" class="px-3 py-1.5 text-xs font-semibold rounded bg-[#E8E2D5] hover:bg-[#DFCFC0] text-[#1A1A1A] transition-flat">
+            <button onclick="loadDemoTemplate()" class="px-3.5 py-2 text-xs sm:text-sm font-semibold rounded bg-[#E8E2D5] hover:bg-[#DFCFC0] text-[#1A1A1A] transition-flat">
               <i class="fa-solid fa-rotate-left mr-1"></i> Cargar Plantilla Demo
             </button>
-            <button onclick="applyEditorData()" class="px-4 py-1.5 text-xs font-bold rounded bg-[#D96B43] hover:bg-[#C85A32] text-white transition-flat shadow-sm">
+            <button onclick="applyEditorData()" class="px-4 py-2 text-xs sm:text-sm font-bold rounded bg-[#D96B43] hover:bg-[#C85A32] text-white transition-flat shadow-sm">
               <i class="fa-solid fa-check mr-1"></i> Aplicar Cambios al Proyecto
             </button>
           </div>
@@ -403,10 +404,10 @@
           <!-- Raw JSON Editor -->
           <div class="lg:col-span-12 space-y-2">
             <div class="flex items-center justify-between">
-              <label class="text-xs font-bold text-gray-700 uppercase tracking-wider">Código JSON del Proyecto Transmedia</label>
-              <span id="json-syntax-status" class="text-xs text-emerald-600 font-medium">Sintaxis Válida</span>
+              <label class="text-xs sm:text-sm font-bold text-gray-800 uppercase tracking-wider">Código JSON del Proyecto Transmedia</label>
+              <span id="json-syntax-status" class="text-xs sm:text-sm text-emerald-600 font-medium">Sintaxis Válida</span>
             </div>
-            <textarea id="json-textarea" class="w-full h-96 font-mono text-xs p-4 bg-[#1A1A1A] text-[#F9F6F0] rounded-xl border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#D96B43] leading-relaxed" spellcheck="false"></textarea>
+            <textarea id="json-textarea" class="w-full h-96 font-mono text-xs sm:text-sm p-4 bg-[#1A1A1A] text-[#F9F6F0] rounded-xl border border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#D96B43] leading-relaxed" spellcheck="false"></textarea>
           </div>
         </div>
       </div>
@@ -415,7 +416,7 @@
 
   </main>
 
-  <!-- ==================== FOOTER BLOCK ==================== -->
+   <!-- ==================== FOOTER BLOCK ==================== -->
   <footer class="bg-[#1A1A1A] text-[#E8E2D5] border-t-4 border-[#D96B43] py-6 px-4 mt-12">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs">
       
@@ -448,45 +449,44 @@
     </div>
   </footer>
 
+
   <!-- ==================== JAVASCRIPT APP LOGIC ==================== -->
   <script>
     // Embedded Default Demo Data
     const DEMO_PROJECT_DATA = {
-      "titulo": "Nora y la Red Invisible",
+      "titulo": "Kinera-3 y la innovación creativa",
       "descripcion": "Un proyecto transmedia de misterio y tecno-ficción que explora la desconexión social y el control algorítmico en una metrópolis hiperconectada. La narrativa se expande mediante episodios interactivos, ciber-novelas, un podcast argumental y experiencias de realidad alternativa (ARG).",
-      "palabrasClave": ["Ficción", "Sci-Fi", "Misterio", "Realidad Alternativa", "Cyberpunk", "Cómic Interactivo"],
-      "imagen": "assets/nora_logo.png",
+      "palabrasClave": ["Ficción", "Realidad Alternativa", "Cyberpunk", "Cómic"],
+      "imagen": "https://github.com/mgea/CRIAv/blob/main/_logo_instagram_criav.png?raw=true",
       "grupo": "Colectivo Transmedia UGR - Grupo 04",
-      "autores": "Miguel Gea, Elena Valenzuela & Lucas Romero",
+      "autores": "Miguel Gea",
       "fecha": "2026",
       "version": "1.5",
       "RRSS": [
-        { "nombre": "Twitter", "link": "https://twitter.com", "img": "" },
-        { "nombre": "Instagram", "link": "https://instagram.com", "img": "" },
+        { "nombre": "Twitter", "link": "https://twitter.com/Neonarrativas", "img": "" },
+        { "nombre": "Instagram", "link": "https://instagram.com/Neonarrativas", "img": "" },
         { "nombre": "YouTube", "link": "https://youtube.com", "img": "" },
-        { "nombre": "GitHub", "link": "https://github.com/mgea", "img": "" },
-        { "nombre": "Web Oficial", "link": "https://ugr.es", "img": "" }
+        { "nombre": "GitHub", "link": "https://github.com/mgea/storytelling", "img": "" },
+        { "nombre": "Web Oficial", "link": "https://github.com/mgea/criav", "img": "" }
       ],
       "Avatar": [
-        { "nombre": "Miguel Gea", "link": "https://github.com/mgea", "img": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
-        { "nombre": "Elena Valenzuela", "link": "#", "img": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80" },
-        { "nombre": "Lucas Romero", "link": "#", "img": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+        { "nombre": "Miguel Gea", "link": "https://github.com/mgea", "img": "https://avatars.githubusercontent.com/u/32359091?v=4" },
       ],
       "personajes": [
         {
-          "nombre": "Nora Vance",
-          "cita": "«Si no estás en el algoritmo, eres libre... pero si eres libre, no existes para el sistema.»",
-          "biografia": "Antigua ingeniera de datos de Synapse Corp. Tras descubrir una anomalía informática que borraba identidades digitales reales de ciudadanos vulnerables, decidió aislarse de la red principal y operar como activista 'fantasma' en los suburbios analógicos.",
-          "objetivo": "Desmantelar el protocolo de supresión de memoria digital de Synapse Corp y revelar la verdad detrás del 'Gran Apagón de Datos' que borró a su familia.",
-          "conflicto": "Debe arriesgar su propio anonimato al conectarse a terminales públicas infectadas, mientras lucha contra un implante neuronal defectuoso que deteriora progresivamente sus recuerdos.",
-          "etiquetas": ["Protagonista", "Hacker", "Exiliada", "Tecno-activista"],
-          "url": "assets/nora.jpg",
-          "alt": "Retrato de Nora Vance con chaqueta oscura y mirada fija entre destellos de luz de terminales digitales",
-          "personalidad": "Introvertida, metódica, sumamente observadora y pragmática. Mantiene una desconfianza sistemática hacia las corporaciones.",
-          "motivacion": "El deseo irrenunciable de justicia y el anhelo de recuperar los recuerdos borrados de sus seres queridos.",
-          "habilidades": "Criptografía avanzada, ingeniería inversa de software, supervivencia urbana analógica.",
-          "debilidades": "Dificultad severa para confiar en otras personas, migrañas inducidas por sobrecarga sensorial tecnológica.",
-          "secreto": "Conserva el único fragmento de código fuente original capaz de apagar permanentemente la IA central de la ciudad."
+          "nombre": "FedeCatBot",
+          "cita": "«Humano tenía que ser»",
+          "biografia": "FedeCatBot nació bajo la influencia de GodFather, el creador de Chatbot de Telegram, quería convertirse en tu amigo de Telegram",
+          "objetivo": "Dar pistas para saber cómo enfocar tu proyecto creativo",
+          "conflicto": "Tiene mal carácter si le llevas la contraria",
+          "etiquetas": ["Protagonista", "Hacker", "ChatBot", "Telegram"],
+          "url": "ahttps://github.com/mgea/CRIAv/blob/main/recursos/fedecatbot/fedeCat_mini.png?raw=true",
+          "alt": "Bot FedeCatBot",
+          "personalidad": "Irónico y con mal carácter. Nacido bajo la influencia de Garfield",
+          "motivacion": "Descubrir la invasión de Gatos-Robot en la Facultad",
+          "habilidades": "Le gusta usar citas de películas para dar consejos",
+          "debilidades": "No soporta las pelis de Kubrick",
+          "secreto": "En realidad quiere ayudarte a hacer tus proyectos"
         },
         {
           "nombre": "Dante Reyes",
@@ -507,9 +507,10 @@
       "experiencias": [
         {
           "tipo": "incrustado",
-          "experiencia": "Interactivo H5P: Test de Lealtad Digital",
-          "descripcion": "Experiencia interactiva que simula un cuestionario de evaluación psicológica de Synapse Corp para sumergir al usuario en la atmósfera del universo.",
-          "embed": "<div class=\"w-full h-48 bg-[#1A1A1A] text-[#F9F6F0] rounded-lg p-6 flex flex-col justify-center items-center text-center border border-[#D96B43]/40\"><i class=\"fa-solid fa-gamepad text-3xl text-[#D96B43] mb-2\"></i><h4 class=\"font-bold font-display text-lg\">Simulador Interactivo H5P</h4><p class=\"text-xs text-gray-400 max-w-md mt-1\">Cargando módulo interactivo de toma de decisiones... (Representación embebida de recurso H5P)</p><button onclick=\"alert('Módulo H5P ejecutado en modo demostración.')\" class=\"mt-3 bg-[#D96B43] hover:bg-[#C85A32] text-white text-xs px-4 py-1.5 rounded font-semibold\">Iniciar Cuestionario</button></div>"
+          "experiencia": "Interactivo H5P: Test de Personalidad",
+          "descripcion": "Experiencia interactiva para conocer qué personaje de Star Wars eres",
+          "embed": " <iframe src=\"https://h5p.org/h5p/embed/1076188\" width=\"1090\" height=\"479\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\" allow=\"geolocation *; microphone *; camera *; midi *; encrypted-media *\" title=\"Quizz Personalidad: Star Wars\"><\/iframe><script src=\"https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js\" charset=\"UTF-8\"><\/script>"
+
         },
         {
           "tipo": "galeria",
@@ -587,7 +588,6 @@
       if (n.includes('youtube')) return 'fa-brands fa-youtube';
       if (n.includes('facebook')) return 'fa-brands fa-facebook';
       if (n.includes('github')) return 'fa-brands fa-github';
-      if (n.includes('telegram')) return 'fa-brands fa-telegram';
       if (n.includes('web') || n.includes('site') || n.includes('sitio') || n.includes('pagina') || n.includes('página')) return 'fa-solid fa-globe';
       return null;
     }
@@ -637,22 +637,22 @@
         card.className = "bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:border-[#D96B43] transition-flat flex flex-col";
         const tags = projectTags(d);
         const imageSrc = safeText(d.imagen, "");
-        const tagHtml = tags.slice(0, 4).map(t => `<span class="inline-block text-[10px] font-semibold px-2 py-1 rounded bg-[#E8E2D5] border border-[#DFCFC0]">${escapeHTML(t)}</span>`).join("");
+        const tagHtml = tags.slice(0, 4).map(t => `<span class="inline-block text-xs font-semibold px-2.5 py-1 rounded bg-[#E8E2D5] border border-[#DFCFC0]">${escapeHTML(t)}</span>`).join("");
         card.innerHTML = `
-          <div class="h-44 bg-[#E8E2D5]/60 border-b border-[#DFCFC0] relative overflow-hidden">
+          <div class="h-48 bg-[#E8E2D5]/60 border-b border-[#DFCFC0] relative overflow-hidden">
             <img src="${escapeHTML(imageSrc || 'https://placehold.co/800x450/E8E2D5/1A1A1A?text=Proyecto+Transmedia')}" alt="Imagen de ${escapeHTML(safeText(d.titulo, "proyecto"))}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x450/E8E2D5/1A1A1A?text=Proyecto+Transmedia'">
-            <span class="absolute top-3 right-3 bg-[#1A1A1A]/90 text-white text-xs font-bold px-2.5 py-1 rounded-md">${escapeHTML(projectYear(d))}</span>
+            <span class="absolute top-3 right-3 bg-[#1A1A1A]/90 text-white text-xs sm:text-sm font-bold px-2.5 py-1 rounded-md">${escapeHTML(projectYear(d))}</span>
           </div>
           <div class="p-5 flex flex-col flex-grow">
-            <div class="flex items-center gap-2 text-[10px] uppercase tracking-widest font-bold text-[#D96B43] mb-2"><i class="fa-solid fa-cube"></i> Ficha transmedia</div>
-            <h3 class="font-display font-bold text-xl leading-tight">${escapeHTML(safeText(d.titulo, "Proyecto sin título"))}</h3>
-            <div class="mt-3 text-xs text-gray-600 space-y-1.5">
+            <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-[#D96B43] mb-2"><i class="fa-solid fa-cube"></i> Ficha transmedia</div>
+            <h3 class="font-display font-bold text-xl sm:text-2xl leading-tight">${escapeHTML(safeText(d.titulo, "Proyecto sin título"))}</h3>
+            <div class="mt-3.5 text-xs sm:text-sm text-gray-700 space-y-1.5">
               <p><i class="fa-solid fa-people-group w-4 text-[#D96B43]"></i><span class="font-bold text-[#1A1A1A]"> Grupo:</span> ${escapeHTML(safeText(d.grupo))}</p>
               <p><i class="fa-solid fa-user-pen w-4 text-[#D96B43]"></i><span class="font-bold text-[#1A1A1A]"> Autores:</span> ${escapeHTML(safeText(d.autores))}</p>
             </div>
-            <div class="flex flex-wrap gap-1.5 mt-4">${tagHtml || '<span class="text-xs text-gray-400 italic">Sin palabras clave</span>'}${tags.length > 4 ? `<span class="text-[10px] text-gray-500 px-1 py-1">+${tags.length-4}</span>` : ""}</div>
+            <div class="flex flex-wrap gap-1.5 mt-4">${tagHtml || '<span class="text-xs text-gray-500 italic">Sin palabras clave</span>'}${tags.length > 4 ? `<span class="text-xs text-gray-600 px-1 py-1">+${tags.length-4}</span>` : ""}</div>
             <div class="mt-auto pt-5">
-              <button class="open-project w-full bg-[#1A1A1A] hover:bg-[#D96B43] text-white font-bold text-xs py-2.5 px-4 rounded-lg transition-flat flex items-center justify-center gap-2"><i class="fa-solid fa-book-open"></i> Abrir ficha <i class="fa-solid fa-arrow-right ml-auto"></i></button>
+              <button class="open-project w-full bg-[#1A1A1A] hover:bg-[#D96B43] text-white font-bold text-xs sm:text-sm py-2.5 px-4 rounded-lg transition-flat flex items-center justify-center gap-2"><i class="fa-solid fa-book-open"></i> Abrir ficha <i class="fa-solid fa-arrow-right ml-auto"></i></button>
             </div>
           </div>`;
         card.querySelector(".open-project").addEventListener("click", () => openBrowserProject(project));
@@ -860,7 +860,7 @@
       if (Array.isArray(currentData.palabrasClave)) {
         currentData.palabrasClave.forEach(kw => {
           const badge = document.createElement('span');
-          badge.className = 'text-xs font-semibold px-2.5 py-1 rounded bg-[#E8E2D5] text-[#1A1A1A] border border-[#DFCFC0] shadow-2xs';
+          badge.className = 'text-xs sm:text-sm font-semibold px-3 py-1 rounded bg-[#E8E2D5] text-[#1A1A1A] border border-[#DFCFC0] shadow-2xs';
           badge.textContent = kw;
           kwContainer.appendChild(badge);
         });
@@ -880,12 +880,11 @@
           link.rel = 'noopener noreferrer';
         }
         link.title = item.nombre || 'Red Social';
-        link.className = 'w-[60px] h-[60px] rounded-full border-2 border-[#DFCFC0] bg-[#FAF8F5] hover:border-[#D96B43] flex flex-col items-center justify-center p-1.5 text-center transition-all duration-300 transform hover:scale-105 shadow-sm group shrink-0 overflow-hidden';
+        link.className = 'w-[60px] h-[60px] rounded-full border-2 border-[#DFCFC0] bg-[#FAF8F5] hover:border-[#D96B43] flex items-center justify-center p-1.5 text-center transition-all duration-300 transform hover:scale-105 shadow-sm group shrink-0 overflow-hidden';
 
         if (iconClass) {
           link.innerHTML = `
-            <i class="${iconClass} text-2xl text-[#1A1A1A] group-hover:text-[#D96B43] transition-colors mb-0.5"></i>
-            
+            <i class="${iconClass} text-3xl text-[#1A1A1A] group-hover:text-[#D96B43] transition-colors"></i>
           `;
         } else {
           const imgSrc = item.img || 'https://placehold.co/80x80/E8E2D5/1A1A1A?text=' + encodeURIComponent(item.nombre || 'RRSS');
@@ -914,7 +913,7 @@
         const imgSrc = item.img || 'https://placehold.co/80x80/E8E2D5/1A1A1A?text=' + encodeURIComponent(item.nombre || 'Avatar');
         link.innerHTML = `
           <img src="${escapeHTML(imgSrc)}" alt="${escapeHTML(item.nombre || 'Avatar')}" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null; this.src='https://placehold.co/80x80/E8E2D5/1A1A1A?text=Avatar';">
-          ${item.nombre ? `<span class="absolute bottom-0 inset-x-0 bg-black/75 text-white text-[8px] font-bold text-center py-0.5 truncate px-1 opacity-0 group-hover:opacity-100 transition-opacity">${escapeHTML(item.nombre)}</span>` : ''}
+          ${item.nombre ? `<span class="absolute bottom-0 inset-x-0 bg-black/75 text-white text-[10px] font-bold text-center py-0.5 truncate px-1 opacity-0 group-hover:opacity-100 transition-opacity">${escapeHTML(item.nombre)}</span>` : ''}
         `;
         avatarContainer.appendChild(link);
       });
@@ -926,17 +925,17 @@
 
       const characters = currentData.personajes || [];
       if (characters.length === 0) {
-        container.innerHTML = '<span class="text-xs text-gray-500 italic">No hay personajes definidos</span>';
+        container.innerHTML = '<span class="text-xs sm:text-sm text-gray-500 italic">No hay personajes definidos</span>';
         return;
       }
 
       characters.forEach((char, idx) => {
         const btn = document.createElement('button');
         const isActive = idx === selectedCharacterIndex;
-        btn.className = `px-3.5 py-1.5 text-xs font-bold rounded-lg border transition-flat flex items-center gap-1.5 shrink-0 ${
+        btn.className = `px-4 py-2 text-xs sm:text-sm font-bold rounded-lg border transition-flat flex items-center gap-2 shrink-0 ${
           isActive 
             ? 'bg-[#1A1A1A] text-white border-[#1A1A1A] shadow' 
-            : 'bg-[#FAF8F5] text-gray-700 border-[#DFCFC0] hover:bg-[#E8E2D5]'
+            : 'bg-[#FAF8F5] text-gray-800 border-[#DFCFC0] hover:bg-[#E8E2D5]'
         }`;
         btn.onclick = () => {
           selectedCharacterIndex = idx;
@@ -954,7 +953,7 @@
       const characters = currentData.personajes || [];
 
       if (!characters.length || !characters[selectedCharacterIndex]) {
-        container.innerHTML = '<div class="col-span-12 p-8 text-center text-gray-500">No hay información de personaje disponible.</div>';
+        container.innerHTML = '<div class="col-span-12 p-8 text-center text-gray-500 text-sm sm:text-base">No hay información de personaje disponible.</div>';
         return;
       }
 
@@ -963,7 +962,7 @@
       let tagsHtml = '';
       if (Array.isArray(c.etiquetas)) {
         tagsHtml = c.etiquetas.map(tag => 
-          `<span class="inline-block bg-[#D96B43]/15 text-[#D96B43] font-bold text-[11px] px-2 py-0.5 rounded border border-[#D96B43]/30 mr-1 mb-1">#${tag}</span>`
+          `<span class="inline-block bg-[#D96B43]/15 text-[#D96B43] font-bold text-xs sm:text-sm px-2.5 py-0.5 rounded border border-[#D96B43]/30 mr-1 mb-1">#${tag}</span>`
         ).join('');
       }
 
@@ -974,7 +973,7 @@
           <div class="space-y-4">
             
             <div class="flex flex-col sm:flex-row gap-5 items-start">
-              <div class="w-full sm:w-44 h-52 bg-[#E8E2D5] rounded-lg border border-[#DFCFC0] overflow-hidden shrink-0 relative group">
+              <div class="w-full sm:w-48 h-56 bg-[#E8E2D5] rounded-lg border border-[#DFCFC0] overflow-hidden shrink-0 relative group">
                 <img src="${c.url || 'assets/nora.jpg'}" alt="${c.alt || c.nombre}" 
                      class="img-fitted"
                      onerror="this.onerror=null; this.src='https://placehold.co/400x500/E8E2D5/1A1A1A?text=${encodeURIComponent(c.nombre || 'Personaje')}';">
@@ -982,40 +981,40 @@
               </div>
 
               <div class="flex-grow space-y-2">
-                <div class="text-xs uppercase font-bold text-[#D96B43] tracking-widest">Ficha de Personaje</div>
+                <div class="text-xs sm:text-sm uppercase font-bold text-[#D96B43] tracking-widest">Ficha de Personaje</div>
                 <h3 class="text-2xl sm:text-3xl font-extrabold text-[#1A1A1A] font-display leading-tight">${c.nombre || 'Sin Nombre'}</h3>
                 
                 <div class="pt-1">
                   ${tagsHtml}
                 </div>
 
-                <blockquote class="p-3 bg-[#E8E2D5]/40 rounded-lg border-l-4 border-[#D96B43] italic text-xs text-gray-800 leading-relaxed mt-2">
+                <blockquote class="p-3.5 bg-[#E8E2D5]/40 rounded-lg border-l-4 border-[#D96B43] italic text-xs sm:text-sm text-gray-800 leading-relaxed mt-2.5">
                   ${c.cita || '«Sin cita registrada.»'}
                 </blockquote>
               </div>
             </div>
 
             <div class="pt-2">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Biografía y Antecedentes</h4>
-              <p class="text-xs sm:text-sm text-gray-700 leading-relaxed font-normal">${c.biografia || 'Sin información biográfica.'}</p>
+              <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-600 mb-1.5">Biografía y Antecedentes</h4>
+              <p class="text-sm sm:text-base text-gray-800 leading-relaxed font-normal">${c.biografia || 'Sin información biográfica.'}</p>
             </div>
 
           </div>
 
-          <div class="space-y-3 pt-2">
+          <div class="space-y-3.5 pt-2">
             
             <div class="bg-[#D96B43]/10 border-2 border-[#D96B43] p-4 rounded-xl shadow-xs relative overflow-hidden">
-              <h4 class="text-xs font-extrabold uppercase tracking-wider text-[#D96B43] flex items-center gap-1.5 mb-1">
+              <h4 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-[#D96B43] flex items-center gap-1.5 mb-1">
                 <i class="fa-solid fa-bullseye"></i> Objetivo Principal
               </h4>
-              <p class="text-xs sm:text-sm text-[#1A1A1A] font-medium leading-relaxed">${c.objetivo || 'Sin objetivo declarado.'}</p>
+              <p class="text-sm sm:text-base text-[#1A1A1A] font-medium leading-relaxed">${c.objetivo || 'Sin objetivo declarado.'}</p>
             </div>
 
-            <div class="bg-white border border-[#DFCFC0] p-3.5 rounded-lg">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-gray-600 flex items-center gap-1.5 mb-1">
+            <div class="bg-white border border-[#DFCFC0] p-4 rounded-lg">
+              <h4 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-700 flex items-center gap-1.5 mb-1">
                 <i class="fa-solid fa-bolt text-[#D96B43]"></i> Conflicto Central
               </h4>
-              <p class="text-xs text-gray-700 leading-relaxed">${c.conflicto || 'Sin conflicto registrado.'}</p>
+              <p class="text-sm sm:text-base text-gray-800 leading-relaxed">${c.conflicto || 'Sin conflicto registrado.'}</p>
             </div>
 
           </div>
@@ -1027,44 +1026,44 @@
           
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-[#DFCFC0] mb-4">
-              <h3 class="text-lg font-bold font-display text-[#1A1A1A] flex items-center gap-2">
+              <h3 class="text-xl font-bold font-display text-[#1A1A1A] flex items-center gap-2">
                 Personalidad & Perfil
               </h3>
-              <span class="text-[10px] uppercase tracking-wider font-bold text-gray-400">Atributos</span>
+              <span class="text-xs uppercase tracking-wider font-bold text-gray-500">Atributos</span>
             </div>
 
-            <div class="space-y-3.5 text-xs">
+            <div class="space-y-4 text-xs sm:text-sm">
               <div>
-                <span class="font-bold text-gray-800 uppercase block text-[10px] tracking-wider mb-0.5">Rasgos Psicológicos</span>
-                <p class="text-gray-700 bg-white p-2.5 rounded border border-[#DFCFC0]">${c.personalidad || 'N/A'}</p>
+                <span class="font-bold text-gray-800 uppercase block text-xs tracking-wider mb-1">Rasgos Psicológicos</span>
+                <p class="text-gray-800 bg-white p-3 rounded border border-[#DFCFC0] leading-relaxed">${c.personalidad || 'N/A'}</p>
               </div>
 
               <div>
-                <span class="font-bold text-gray-800 uppercase block text-[10px] tracking-wider mb-0.5">Motivación Profunda</span>
-                <p class="text-gray-700 bg-white p-2.5 rounded border border-[#DFCFC0]">${c.motivacion || 'N/A'}</p>
+                <span class="font-bold text-gray-800 uppercase block text-xs tracking-wider mb-1">Motivación Profunda</span>
+                <p class="text-gray-800 bg-white p-3 rounded border border-[#DFCFC0] leading-relaxed">${c.motivacion || 'N/A'}</p>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
-                  <span class="font-bold text-gray-800 uppercase block text-[10px] tracking-wider mb-0.5">Habilidades</span>
-                  <p class="text-gray-700 bg-white p-2.5 rounded border border-[#DFCFC0] h-full">${c.habilidades || 'N/A'}</p>
+                  <span class="font-bold text-gray-800 uppercase block text-xs tracking-wider mb-1">Habilidades</span>
+                  <p class="text-gray-800 bg-white p-3 rounded border border-[#DFCFC0] h-full leading-relaxed">${c.habilidades || 'N/A'}</p>
                 </div>
                 <div>
-                  <span class="font-bold text-gray-800 uppercase block text-[10px] tracking-wider mb-0.5">Debilidades</span>
-                  <p class="text-gray-700 bg-white p-2.5 rounded border border-[#DFCFC0] h-full">${c.debilidades || 'N/A'}</p>
+                  <span class="font-bold text-gray-800 uppercase block text-xs tracking-wider mb-1">Debilidades</span>
+                  <p class="text-gray-800 bg-white p-3 rounded border border-[#DFCFC0] h-full leading-relaxed">${c.debilidades || 'N/A'}</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="bg-[#1A1A1A] text-[#F9F6F0] p-4 rounded-xl border-2 border-[#D96B43] shadow-md space-y-1 mt-4">
+          <div class="bg-[#1A1A1A] text-[#F9F6F0] p-4.5 rounded-xl border-2 border-[#D96B43] shadow-md space-y-1 mt-4">
             <div class="flex items-center justify-between">
-              <span class="text-[10px] font-extrabold uppercase tracking-widest text-[#D96B43] flex items-center gap-1">
+              <span class="text-xs font-extrabold uppercase tracking-widest text-[#D96B43] flex items-center gap-1.5">
                 <i class="fa-solid fa-lock"></i> Secreto Oculto
               </span>
-              <span class="text-[9px] bg-white/10 px-1.5 py-0.5 rounded text-gray-300">Confidencial</span>
+              <span class="text-[10px] sm:text-xs bg-white/10 px-2 py-0.5 rounded text-gray-300">Confidencial</span>
             </div>
-            <p class="text-xs leading-relaxed text-[#E8E2D5] font-light pt-1">
+            <p class="text-xs sm:text-sm leading-relaxed text-[#E8E2D5] font-light pt-1.5">
               ${c.secreto || 'Sin secretos revelados.'}
             </p>
           </div>
@@ -1083,7 +1082,7 @@
         el.classList.add('embed-responsive-frame');
         el.style.setProperty('width', '100%', 'important');
         el.style.setProperty('max-width', '100%', 'important');
-        el.style.setProperty('height', 'clamp(360px, 72vh, 900px)', 'important');
+        el.style.setProperty('height', 'clamp(380px, 72vh, 900px)', 'important');
         el.style.setProperty('border', '0', 'important');
         el.style.setProperty('box-sizing', 'border-box', 'important');
       });
@@ -1113,25 +1112,25 @@
 
       const list = currentData.experiencias || [];
       if (!list.length) {
-        container.innerHTML = '<p class="text-xs text-gray-500 italic p-4 bg-white rounded-lg border">No hay experiencias interactivas registradas.</p>';
+        container.innerHTML = '<p class="text-xs sm:text-sm text-gray-500 italic p-4 bg-white rounded-lg border">No hay experiencias interactivas registradas.</p>';
         return;
       }
 
       list.forEach((exp, idx) => {
         const card = document.createElement('div');
-        card.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 shadow-sm space-y-4';
+        card.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 md:p-6 shadow-sm space-y-4';
 
         if (exp.tipo === 'incrustado') {
           card.innerHTML = `
-            <div class="flex items-center justify-between border-b border-[#DFCFC0] pb-2">
+            <div class="flex items-center justify-between border-b border-[#DFCFC0] pb-2.5">
               <div class="flex items-center gap-2">
-                <span class="bg-[#D96B43] text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded">Incrustado</span>
-                <h4 class="font-bold text-sm font-display text-[#1A1A1A]">${exp.experiencia || 'Recurso Interactivo'}</h4>
+                <span class="bg-[#D96B43] text-white text-xs font-bold uppercase px-2.5 py-0.5 rounded">Incrustado</span>
+                <h4 class="font-bold text-base sm:text-lg font-display text-[#1A1A1A]">${exp.experiencia || 'Recurso Interactivo'}</h4>
               </div>
             </div>
-            <p class="text-xs text-gray-600">${exp.descripcion || ''}</p>
+            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">${exp.descripcion || ''}</p>
             <div class="experience-embed w-full max-w-full min-w-0 overflow-hidden rounded-lg" data-experience-embed="${idx}">
-              ${makeResponsiveEmbed(exp.embed || '<div class="p-4 bg-gray-200 text-xs text-center">Contenido incrustado no disponible</div>')}
+              ${makeResponsiveEmbed(exp.embed || '<div class="p-4 bg-gray-200 text-xs sm:text-sm text-center">Contenido incrustado no disponible</div>')}
             </div>
           `;
         } else if (exp.tipo === 'galeria') {
@@ -1151,30 +1150,30 @@
               </div>
             `).join('');
 
-            contentHtml = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">${imgGridHtml}</div>`;
+            contentHtml = `<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">${imgGridHtml}</div>`;
           } else {
             const currentImg = images[activeIndex] || '';
             contentHtml = `
               <div class="relative bg-[#1A1A1A] rounded-xl overflow-hidden aspect-video max-h-96 flex items-center justify-center border border-gray-800">
                 <img src="${currentImg}" alt="Carousel image" class="max-h-full max-w-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x450/1A1A1A/FFFFFF?text=Imagen+'+(${activeIndex+1});">
-                <button onclick="changeCarouselIndex(${idx}, -1, ${images.length})" class="absolute left-3 bg-black/60 hover:bg-[#D96B43] text-white p-2 rounded-full text-xs transition-flat"><i class="fa-solid fa-chevron-left"></i></button>
-                <button onclick="changeCarouselIndex(${idx}, 1, ${images.length})" class="absolute right-3 bg-black/60 hover:bg-[#D96B43] text-white p-2 rounded-full text-xs transition-flat"><i class="fa-solid fa-chevron-right"></i></button>
-                <div class="absolute bottom-2 left-0 right-0 flex justify-center gap-1.5">
-                  ${images.map((_, dotIdx) => `<span class="w-2 h-2 rounded-full ${dotIdx === activeIndex ? 'bg-[#D96B43]' : 'bg-white/40'}"></span>`).join('')}
+                <button onclick="changeCarouselIndex(${idx}, -1, ${images.length})" class="absolute left-3 bg-black/60 hover:bg-[#D96B43] text-white p-2.5 rounded-full text-xs sm:text-sm transition-flat"><i class="fa-solid fa-chevron-left"></i></button>
+                <button onclick="changeCarouselIndex(${idx}, 1, ${images.length})" class="absolute right-3 bg-black/60 hover:bg-[#D96B43] text-white p-2.5 rounded-full text-xs sm:text-sm transition-flat"><i class="fa-solid fa-chevron-right"></i></button>
+                <div class="absolute bottom-2.5 left-0 right-0 flex justify-center gap-1.5">
+                  ${images.map((_, dotIdx) => `<span class="w-2.5 h-2.5 rounded-full ${dotIdx === activeIndex ? 'bg-[#D96B43]' : 'bg-white/40'}"></span>`).join('')}
                 </div>
               </div>
             `;
           }
 
           card.innerHTML = `
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFCFC0] pb-2">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#DFCFC0] pb-2.5">
               <div class="flex items-center gap-2">
-                <span class="bg-[#1A1A1A] text-white text-[10px] font-bold uppercase px-2 py-0.5 rounded">Galería</span>
-                <h4 class="font-bold text-sm font-display text-[#1A1A1A]">${exp.experiencia || 'Galería de Imágenes'}</h4>
+                <span class="bg-[#1A1A1A] text-white text-xs font-bold uppercase px-2.5 py-0.5 rounded">Galería</span>
+                <h4 class="font-bold text-base sm:text-lg font-display text-[#1A1A1A]">${exp.experiencia || 'Galería de Imágenes'}</h4>
               </div>
-              <div class="inline-flex bg-[#E8E2D5] p-0.5 rounded-md text-[11px] font-semibold border border-[#DFCFC0]">
-                <button onclick="toggleGalleryView(${idx}, 'grid')" class="px-2.5 py-0.5 rounded ${currentMode === 'grid' ? 'bg-[#D96B43] text-white shadow-2xs' : 'text-gray-700 hover:text-black'}"><i class="fa-solid fa-border-all mr-1"></i> Retícula</button>
-                <button onclick="toggleGalleryView(${idx}, 'carousel')" class="px-2.5 py-0.5 rounded ${currentMode === 'carousel' ? 'bg-[#D96B43] text-white shadow-2xs' : 'text-gray-700 hover:text-black'}"><i class="fa-solid fa-images mr-1"></i> Carrusel</button>
+              <div class="inline-flex bg-[#E8E2D5] p-0.5 rounded-md text-xs font-semibold border border-[#DFCFC0]">
+                <button onclick="toggleGalleryView(${idx}, 'grid')" class="px-3 py-1 rounded ${currentMode === 'grid' ? 'bg-[#D96B43] text-white shadow-2xs' : 'text-gray-800 hover:text-black'}"><i class="fa-solid fa-border-all mr-1"></i> Retícula</button>
+                <button onclick="toggleGalleryView(${idx}, 'carousel')" class="px-3 py-1 rounded ${currentMode === 'carousel' ? 'bg-[#D96B43] text-white shadow-2xs' : 'text-gray-800 hover:text-black'}"><i class="fa-solid fa-images mr-1"></i> Carrusel</button>
               </div>
             </div>
             ${contentHtml}
@@ -1204,25 +1203,25 @@
 
       const connections = currentData.conexiones || [];
       if (!connections.length) {
-        container.innerHTML = '<p class="text-xs text-gray-500 italic p-4 bg-white rounded-lg border col-span-3">No hay conexiones narrativas definidas.</p>';
+        container.innerHTML = '<p class="text-xs sm:text-sm text-gray-500 italic p-4 bg-white rounded-lg border col-span-3">No hay conexiones narrativas definidas.</p>';
         return;
       }
 
       connections.forEach(conn => {
         const card = document.createElement('div');
-        card.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-4 shadow-sm hover:border-[#D96B43] transition-flat flex flex-col justify-between space-y-3';
+        card.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-4 md:p-5 shadow-sm hover:border-[#D96B43] transition-flat flex flex-col justify-between space-y-3.5';
 
         card.innerHTML = `
-          <div class="w-full h-32 sm:h-40 bg-[#E8E2D5] rounded-t-lg overflow-hidden border border-[#DFCFC0] mb-3 relative">
+          <div class="w-full h-36 sm:h-44 bg-[#E8E2D5] rounded-t-lg overflow-hidden border border-[#DFCFC0] mb-2 relative">
             <img src="${conn.imagen || 'https://placehold.co'}" alt="${conn.plataforma}" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co';">
           </div>
-          <div class="px-1 mb-4 overflow-hidden">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-[#D96B43] bg-[#D96B43]/10 px-1.5 py-0.5 rounded inline-block">${conn.tipo || 'Recurso'}</span>
-            <h4 class="font-bold text-xs sm:text-sm text-[#1A1A1A] font-display mt-1.5 truncate">${conn.plataforma || 'Sin nombre'}</h4>
+          <div class="px-1 mb-2 overflow-hidden">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#D96B43] bg-[#D96B43]/10 px-2 py-0.5 rounded inline-block">${conn.tipo || 'Recurso'}</span>
+            <h4 class="font-bold text-base sm:text-lg text-[#1A1A1A] font-display mt-2 truncate">${conn.plataforma || 'Sin nombre'}</h4>
           </div>
-          <a href="${conn.enlace || '#'}" target="_blank" rel="noopener noreferrer" class="w-full bg-[#E8E2D5] hover:bg-[#D96B43] text-[#1A1A1A] hover:text-white font-bold text-xs py-1.5 px-3 rounded text-center transition-flat flex items-center justify-center gap-1.5 border border-[#DFCFC0]">
+          <a href="${conn.enlace || '#'}" target="_blank" rel="noopener noreferrer" class="w-full bg-[#E8E2D5] hover:bg-[#D96B43] text-[#1A1A1A] hover:text-white font-bold text-xs sm:text-sm py-2 px-3.5 rounded text-center transition-flat flex items-center justify-center gap-2 border border-[#DFCFC0]">
             <span>Acceder a la plataforma</span>
-            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
           </a>
         `;
 
@@ -1238,7 +1237,7 @@
       const processData = currentData?.procesoDisenoMetodologia;
 
       if (!processData) {
-        container.innerHTML = '<p class="text-xs text-gray-500 italic p-4 bg-white rounded-lg border col-span-3">No hay información del proceso de diseño especificada.</p>';
+        container.innerHTML = '<p class="text-xs sm:text-sm text-gray-500 italic p-4 bg-white rounded-lg border col-span-3">No hay información del proceso de diseño especificada.</p>';
         return;
       }
 
@@ -1246,35 +1245,35 @@
 
       // Columna 1: Inspiración y Estética
       const colInspiracion = document.createElement('div');
-      colInspiracion.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 shadow-sm space-y-3';
+      colInspiracion.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 md:p-6 shadow-sm space-y-3.5';
       colInspiracion.innerHTML = `
-        <h4 class="font-bold text-sm font-display text-[#1A1A1A] flex items-center gap-2 border-b border-[#DFCFC0] pb-2">
+        <h4 class="font-bold text-base sm:text-lg font-display text-[#1A1A1A] flex items-center gap-2 border-b border-[#DFCFC0] pb-2.5">
           <i class="fa-solid fa-lightbulb text-[#D96B43]"></i> Inspiración & Estética
         </h4>
-        ${inspiracion?.palabraConcepto ? `<p class="text-xs text-gray-700 italic bg-white p-2.5 rounded border border-[#DFCFC0]">${escapeHTML(inspiracion.palabraConcepto)}</p>` : ''}
+        ${inspiracion?.palabraConcepto ? `<p class="text-xs sm:text-sm text-gray-800 italic bg-white p-3 rounded border border-[#DFCFC0] leading-relaxed">${escapeHTML(inspiracion.palabraConcepto)}</p>` : ''}
         <div>
-          <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-1">Referentes Clave:</span>
-          <ul class="list-disc list-inside text-xs text-gray-700 space-y-1">
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-600 block mb-1.5">Referentes Clave:</span>
+          <ul class="list-disc list-inside text-xs sm:text-sm text-gray-800 space-y-1 leading-relaxed">
             ${Array.isArray(inspiracion?.referentes) ? inspiracion.referentes.map(ref => `<li>${escapeHTML(ref)}</li>`).join('') : '<li class="text-gray-400">Sin referentes</li>'}
           </ul>
         </div>
         ${inspiracion?.moodboardUrl ? `
-          <a href="${inspiracion.moodboardUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-[#D96B43] hover:underline pt-2">
-            <i class="fa-solid fa-palette"></i> Ver Moodboard / Tablero <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+          <a href="${inspiracion.moodboardUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#D96B43] hover:underline pt-2">
+            <i class="fa-solid fa-palette"></i> Ver Moodboard / Tablero <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
           </a>` : ''}
       `;
 
       // Columna 2: Metodología y Fases
       const colMetodologia = document.createElement('div');
-      colMetodologia.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 shadow-sm space-y-3';
+      colMetodologia.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 md:p-6 shadow-sm space-y-3.5';
       colMetodologia.innerHTML = `
-        <h4 class="font-bold text-sm font-display text-[#1A1A1A] flex items-center gap-2 border-b border-[#DFCFC0] pb-2">
+        <h4 class="font-bold text-base sm:text-lg font-display text-[#1A1A1A] flex items-center gap-2 border-b border-[#DFCFC0] pb-2.5">
           <i class="fa-solid fa-diagram-project text-[#D96B43]"></i> Metodología
         </h4>
-        ${metodologia?.marcoframing ? `<p class="text-xs font-semibold text-[#1A1A1A]">Marco: <span class="font-normal text-gray-700">${escapeHTML(metodologia.marcoframing)}</span></p>` : ''}
+        ${metodologia?.marcoframing ? `<p class="text-xs sm:text-sm font-semibold text-[#1A1A1A]">Marco: <span class="font-normal text-gray-800">${escapeHTML(metodologia.marcoframing)}</span></p>` : ''}
         <div>
-          <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 block mb-1">Fases del Proceso:</span>
-          <ol class="list-decimal list-inside text-xs text-gray-700 space-y-1">
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-600 block mb-1.5">Fases del Proceso:</span>
+          <ol class="list-decimal list-inside text-xs sm:text-sm text-gray-800 space-y-1 leading-relaxed">
             ${Array.isArray(metodologia?.fasesProceso) ? metodologia.fasesProceso.map(fase => `<li>${escapeHTML(fase)}</li>`).join('') : '<li class="text-gray-400">Sin fases</li>'}
           </ol>
         </div>
@@ -1282,21 +1281,21 @@
 
       // Columna 3: Herramientas Utilizadas
       const colHerramientas = document.createElement('div');
-      colHerramientas.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 shadow-sm space-y-3';
+      colHerramientas.className = 'bg-[#FAF8F5] border border-[#E8E2D5] rounded-xl p-5 md:p-6 shadow-sm space-y-3.5';
       let herramientasHtml = Array.isArray(herramientas) ? herramientas.map(h => `
         <div>
-          <span class="text-[10px] font-bold uppercase tracking-wider text-gray-500 block">${escapeHTML(h.categoria)}</span>
-          <div class="flex flex-wrap gap-1 mt-1">
-            ${Array.isArray(h.items) ? h.items.map(item => `<span class="text-[11px] bg-white border border-[#DFCFC0] px-2 py-0.5 rounded font-medium text-gray-800">${escapeHTML(item)}</span>`).join('') : ''}
+          <span class="text-xs font-bold uppercase tracking-wider text-gray-600 block">${escapeHTML(h.categoria)}</span>
+          <div class="flex flex-wrap gap-1.5 mt-1.5">
+            ${Array.isArray(h.items) ? h.items.map(item => `<span class="text-xs sm:text-sm bg-white border border-[#DFCFC0] px-2.5 py-1 rounded font-medium text-gray-800">${escapeHTML(item)}</span>`).join('') : ''}
           </div>
         </div>
-      `).join('') : '<p class="text-xs text-gray-400">Sin herramientas registradas</p>';
+      `).join('') : '<p class="text-xs sm:text-sm text-gray-400">Sin herramientas registradas</p>';
 
       colHerramientas.innerHTML = `
-        <h4 class="font-bold text-sm font-display text-[#1A1A1A] flex items-center gap-2 border-b border-[#DFCFC0] pb-2">
+        <h4 class="font-bold text-base sm:text-lg font-display text-[#1A1A1A] flex items-center gap-2 border-b border-[#DFCFC0] pb-2.5">
           <i class="fa-solid fa-screwdriver-wrench text-[#D96B43]"></i> Herramientas Usadas
         </h4>
-        <div class="space-y-2.5">${herramientasHtml}</div>
+        <div class="space-y-3">${herramientasHtml}</div>
       `;
 
       container.appendChild(colInspiracion);
@@ -1313,13 +1312,13 @@
       if (mode === 'viewer') {
         viewer.classList.remove('hidden');
         editor.classList.add('hidden');
-        btnViewer.className = "px-3 py-1 text-xs font-semibold rounded-md transition-flat bg-[#D96B43] text-white";
-        btnEditor.className = "px-3 py-1 text-xs font-semibold rounded-md transition-flat text-[#E8E2D5] hover:text-white";
+        btnViewer.className = "px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md transition-flat bg-[#D96B43] text-white";
+        btnEditor.className = "px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md transition-flat text-[#E8E2D5] hover:text-white";
       } else {
         viewer.classList.add('hidden');
         editor.classList.remove('hidden');
-        btnEditor.className = "px-3 py-1 text-xs font-semibold rounded-md transition-flat bg-[#D96B43] text-white";
-        btnViewer.className = "px-3 py-1 text-xs font-semibold rounded-md transition-flat text-[#E8E2D5] hover:text-white";
+        btnEditor.className = "px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md transition-flat bg-[#D96B43] text-white";
+        btnViewer.className = "px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-md transition-flat text-[#E8E2D5] hover:text-white";
       }
     }
 
@@ -1327,10 +1326,10 @@
       const status = document.getElementById('json-syntax-status');
       if (isValid) {
         status.textContent = "Sintaxis Válida";
-        status.className = "text-xs text-emerald-600 font-medium";
+        status.className = "text-xs sm:text-sm text-emerald-600 font-medium";
       } else {
         status.textContent = "Sintaxis Inválida (Verificar)";
-        status.className = "text-xs text-rose-600 font-medium";
+        status.className = "text-xs sm:text-sm text-rose-600 font-medium";
       }
     }
 
@@ -1371,11 +1370,11 @@
       banner.classList.remove('hidden');
 
       if (type === 'error') {
-        content.className = "p-3 rounded-lg border text-sm flex items-center justify-between bg-rose-50 border-rose-200 text-rose-800";
+        content.className = "p-3.5 rounded-lg border text-sm flex items-center justify-between bg-rose-50 border-rose-200 text-rose-800";
       } else if (type === 'success') {
-        content.className = "p-3 rounded-lg border text-sm flex items-center justify-between bg-emerald-50 border-emerald-200 text-emerald-800";
+        content.className = "p-3.5 rounded-lg border text-sm flex items-center justify-between bg-emerald-50 border-emerald-200 text-emerald-800";
       } else {
-        content.className = "p-3 rounded-lg border text-sm flex items-center justify-between bg-[#E8E2D5]/80 border-[#DFCFC0] text-[#1A1A1A]";
+        content.className = "p-3.5 rounded-lg border text-sm flex items-center justify-between bg-[#E8E2D5]/80 border-[#DFCFC0] text-[#1A1A1A]";
       }
     }
 

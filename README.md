@@ -140,6 +140,49 @@ Objeto que documenta las fuentes de inspiración, el marco de trabajo y la pila 
 
 
 
+## 4. Apectos técnicos 
+
+
+
+#### 4.1 Incrustación de experiencias interactivas
+
+En la sección de *Experiencias Interactivas*, en caso de ser un recurso incrustado (embebido) mediante *iframes* , a la hora de incluir el código HTML embebido se debe **convertir a una cadena de texto en formato JSON (JSON string)**. 
+
+Por ejemplo, el siguiente iframe 
+
+```
+<iframe src="https://h5p.org/h5p/embed/1076188" width="1090" height="479" frameborder="0" allowfullscreen="allowfullscreen" allow="geolocation *; microphone *; camera *; midi *; encrypted-media *" title="Quizz Personalidad: Star Wars"></iframe><script src="https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js" charset="UTF-8"></script>
+
+```
+
+Se debe convertir a JSON string para añadirlo como el campo "url"
+
+```
+"embed": "<iframe src=\"https://h5p.org/h5p/embed/1076188\" width=\"1090\" height=\"479\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\" allow=\"geolocation *; microphone *; camera *; midi *; encrypted-media *\" title=\"Quizz Personalidad: Star Wars\"></iframe><script src=\"https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js\" charset=\"UTF-8\"></script>"
+
+```
+
+Para convertirlo el una cadena que luego se pueda interpretar correctamente, hay que hacer: 
+
+* **Escapado de caracteres especiales** (El uso de la barra invertida `\`). En programación, las comillas dobles (`"`) se utilizan para indicar dónde empieza y dónde termina un texto. Como tu código HTML ya tiene muchas comillas por dentro (por ejemplo, `width="1090"`), un sistema informático se confundiría y pensaría que el texto termina antes de tiempo.
+
+  Para evitarlo, la conversión añade una **barra invertida (`\`)** justo antes de cada comilla interna. Esto le dice al sistema: *"Ojo, la comilla que viene a continuación es parte del texto visual, no es el final de la cadena"*
+
+  - **Antes:** `width="1090"`
+  - **Después (Convertido):** `width=\"1090\"`
+
+
+
+* **Unificación en una sola línea de texto**. El formato JSON requiere que los bloques de texto planos viajen como una **única línea continua de caracteres**. La conversión elimina cualquier salto de línea real y, si son necesarios, los reemplaza por el símbolo `\n`. En tu caso, al juntar la etiqueta `<iframe>` y `<script>`, se asegura de que todo viaje en un solo bloque compacto.
+
+
+
+Para evitar errores en este proceso, se puede **pedir a cualquier IA que convierta el código HTML en un JSON string correcto.** 
+
+
+
+
+
 
 
 -----
