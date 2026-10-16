@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" class="h-full bg-[#F9F6F0]">
 <!--- Browser+ TSB Transmedia Story Builder v1.0 --> 
+<!---  index2.html Tiene un índice de proyectos local para carga -->
 <!--- CC BY mgea, 10/10/2026                    -->
 
 <head>
@@ -740,6 +741,7 @@
       initApp();
     };
 
+    /****
     function initApp() {
       setupDragAndDrop();
       setupFileInput();
@@ -748,6 +750,7 @@
       document.getElementById('view-project-browser').classList.remove('hidden');
       document.getElementById('view-project-visualizer').classList.add('hidden');
     }
+    ***/
 
     function loadProjectData(data, successMessage = null) {
       try {
@@ -1381,6 +1384,79 @@
     function dismissNotification() {
       document.getElementById('notification-banner').classList.add('hidden');
     }
+
+/***** Autoload desde autoload.json ****/
+
+async function autoLoadStoryJson() {
+  let loadedProjects = [];
+
+  try {
+    // 1. Intentar cargar el índice centralizado
+    const response = await fetch('./autoload.json');
+    
+    if (response.ok) {
+      const projectPaths = await response.json();
+      
+
+      // Verificar que el JSON devuelva una lista/array de rutas
+      if (Array.isArray(projectPaths)) {
+        for (const path of projectPaths) {
+          try {
+            const res = await fetch(path);
+            if (res.ok) {
+              const data = await res.json();
+              // Omite el fichero si no es un JSON estructurado de proyecto válido
+              if (validProject(data)) {
+                const filename = path.split('/').pop();
+                if (!loadedProjects.some(p => p.filename === filename)) {
+                  loadedProjects.push({
+                    data: data,
+                    filename: filename,
+                    source: 'autoload'
+                  });
+                }
+              }
+            }
+          } catch (err) {
+            // Se omite silenciosamente la ficha si no existe o falla la lectura
+            console.warn(`[AutoLoad] Ficha omitida en '${path}':`, err.message);
+          }
+        }
+      }
+    }
+  } catch (e) {
+    // Se omite si autoload.json no existe o tiene un error de sintaxis
+    console.warn("[AutoLoad] No se pudo procesar 'autoload.json':", e.message);
+  }
+
+  // 2. Si se recuperaron fichas válidas, se inyectan en el explorador
+  if (loadedProjects.length > 0) {
+    browserProjects = loadedProjects;
+    renderProjectBrowser();
+    showNotification(`Se cargaron ${loadedProjects.length} proyecto(s) desde 'autoload.json'.`, "success");
+  } else {
+    // Fallback: Si no existen fichas o falló autoload.json, se carga la ficha por defecto
+    browserProjects = [{ data: DEMO_PROJECT_DATA, filename: "Proyecto de demostración", source: "demo" }];
+    renderProjectBrowser();
+    console.log("[AutoLoad] Cargado proyecto por defecto (Fallback).");
+  }
+}
+
+function initApp() {
+  setupDragAndDrop();
+  setupFileInput();
+  initProjectBrowser();
+  
+  // Ejecuta la carga automática resiliente a errores
+  autoLoadStoryJson();
+  
+  // Mantiene la vista inicial en el explorador de fichas
+  document.getElementById('view-project-browser').classList.remove('hidden');
+  document.getElementById('view-project-visualizer').classList.add('hidden');
+}
+
+
+
   </script>
 </body>
 </html>

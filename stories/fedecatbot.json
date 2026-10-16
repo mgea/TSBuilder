@@ -1,0 +1,114 @@
+{
+  "titulo": "FedeCatBot",
+  "descripcion": "Gato que merodea los jardines del Campus de Cartuja y que ha evolucionado con el uso de las cámaras de video y tecnología, aprendiendo todo lo que sabe ahora. EN realidad hay una especie evolucionada de gatobots que son los que realmente hacen las producciones de video más asombrosas de la Facultad. En 2018 se metió en las Redes Sociales y todavía sigue ahí para descubrir la realidad de la Facultad",
+  "palabrasClave": [
+    "Ficción",
+    "Bots"
+  ],
+  "imagen": "https://github.com/mgea/CRIAv/blob/main/recursos/fedecatbot/fedeCat.png?raw=true",
+  "grupo": "mgea",
+  "autores": "Miguel Gea",
+  "fecha": "2018",
+  "version": "1.0.26",
+  "RRSS": [
+    {
+      "nombre": "Telegram",
+      "link": "https://t.me/fedecat2bot",
+      "img": ""
+    },
+    {
+      "nombre": "GitHub",
+      "link": "https://github.com/mgea/CRIAv/tree/main/recursos/fedecatbot",
+      "img": ""
+    }
+  ],
+
+  "personajes": [
+    {
+      "nombre": "FedecatBot",
+      "cita": "«Humano tenía que ser»",
+      "biografia": "FedeCatBot nació bajo la influencia de GodFather, el creador de Chatbot de Telegram, quería convertirse en tu amigo de Telegram",
+      "objetivo": "Dar pistas para saber cómo enfocar tu proyecto creativo",
+      "conflicto": "Tiene mal carácter si le llevas la contraria",
+      "etiquetas": [
+        "Protagonista",
+        "Robot",
+        "ChatBot",
+        "Telegram"
+      ],
+      "url": "https://github.com/mgea/CRIAv/blob/main/recursos/fedecatbot/fedeCat_mini.png?raw=true",
+      "alt": "Bot FedeCatBot",
+      "personalidad": "Irónico y con mal carácter. Nacido bajo la influencia de Garfield",
+      "motivacion": "Descubrir la invasión de RobotCats en la Facultad",
+      "habilidades": "Le gusta usar citas de películas para dar consejos",
+      "debilidades": "No soporta las pelis de Kubrick",
+      "secreto": "En realidad quiere ayudarte a hacer tus proyectos"
+    }
+  ],
+  "experiencias": [
+    {
+      "tipo": "incrustado",
+      "experiencia": "H5P - historia ramificada",
+      "descripcion": "Historia ramificada para conocer personaje",
+      "embed": "<iframe src=\"https://h5p.org/h5p/embed/1099481\" width=\"1017\" height=\"783\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\" allow=\"geolocation *; microphone *; camera *; midi *; encrypted-media *\" title=\"La rebelión de los Gatos-robots\"><\/iframe><script src=\"https://h5p.org/sites/all/modules/h5p/library/js/h5p-resizer.js\" charset=\"UTF-8\"><\/script>"
+    },
+    {
+      "tipo": "galeria",
+      "experiencia": "Galería de Catbots de la Facultad",
+      "url": [
+        "https://github.com/mgea/CRIAv/blob/main/recursos/fedecatbot/catfeet.gif?raw=true",
+        "https://github.com/mgea/CRIAv/blob/main/recursos/fedecatbot/angry.gif?raw=true",
+        "https://github.com/mgea/CRIAv/blob/main/recursos/fedecatbot/fatcat.gif?raw=true"
+      ]
+    }
+  ],
+  "conexiones": [
+    {
+      "plataforma": "Web FedeCatBot",
+      "tipo": "Web de Recursos",
+      "imagen": "hhttps://github.com/mgea/CRIAv/blob/main/recursos/fedecatbot/FedeCatBot25.png?raw=true",
+      "enlace": "https://github.com/mgea/CRIAv/tree/main/recursos/fedecatbot"
+    },
+    {
+      "plataforma": "Interactive Map",
+      "tipo": "Juego",
+      "imagen": "https://sm.ign.com/ign_za/image/h/hollow-kni/hollow-knight-interactive-map-is-now-available_kq3n.jpg",
+      "enlace": "https://scripterswar.com/hollowknight/map"
+    },
+    {
+      "plataforma": "Hollow Knight Game",
+      "tipo": "Juego online",
+      "imagen": "https://img.itch.zone/aW1nLzYwMzE2MjgucG5n/original/ItnoD5.png",
+      "enlace": "https://www.minijuegos.com/juego/hollow-knight-demake"
+    }
+  ],
+  "procesoDisenoMetodologia": {
+    "inspiracion": {
+      "referentes": [
+        "Basada en logo de fcd.ugr.es y en un gato robot en devianArt Robot cat Kuri-neko413"
+        
+      ],
+      "moodboardUrl": "https://app.diagrams.net/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=FedeCatBot#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1NNBOf8VXlUIO-EB5xKKLpZDiJHkuhgTz%26export%3Ddownload#%7B%22pageId%22%3A%228KHgpyftRfhyEV_cKr6a%22%7D",
+      "paletaColorConcepto": "Aspecto de dibujado con logotipo de Facultad en tonos azulados "
+    },
+    "metodologia": {
+      "marcoframing": "Design Thinking & Remix"
+      
+    },
+    "herramientas": [
+      {
+        "categoria": "Diseño UI/UX",
+        "items": ["Figma", "Adobe Illustrator"]
+      },
+      {
+        "categoria": "Desarrollo & Prototipado",
+        "items": ["Telegram BotFather",  "H5P"]
+      },
+      {
+        "categoria": "Gestión & Documentación",
+        "items": ["GitHub" ]
+      }
+    ]
+  }
+
+}

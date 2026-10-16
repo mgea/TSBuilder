@@ -1,6 +1,6 @@
 # TSB: Transmedia Story Builder 
 
-**TSBuilder** 1.0 CCBY mgea, 12/10/2026 
+**TSBuilder** 1.0 CCBY mgea, 16/10/2026 
 
  <img src="TSBuilder_logo.png" alt="TSBuilder" style="zoom:50%;" />
 
@@ -10,7 +10,8 @@ Contiene:
 
 * ``index.html`` Browser para catálogos de proyectos (que se almacenan en carpetas con formato JSON)
 * ``TSB.html`` que es un visualizador de una sola ficha 
-* ``story.json`` (ejemplo de ficha)
+* ``story.json`` (ejemplo de ficha, opcional)
+* `autoload.json`  (lista de fichas para carga automatica al inicio, opcional)
 
 Usado en [Creatividad e Innovación Audiovisual](https://github.com/mgea/criav) (Grado en Comunicación Audiovisual) edición 2026/27
 
@@ -31,12 +32,24 @@ Actualmente se utiliza en la Asignatura *Creatividad e Innovación Audiovisual* 
 El funcionamiento del sistema se basa en un paradigma **data-driven** (guiado por datos):
 
 * **Procesamiento de Datos (JSON):** La aplicación utiliza una estructura de datos estándar definida en un archivo `story.json`. Al iniciar, la aplicación intenta realizar una lectura automática (`fetch`) de este fichero en la raíz del proyecto.
+
 * **Manejo Dinámico de Fichas:** En caso de que se arrastre o cargue un archivo JSON mediante el selector manual de la interfaz, un lector local (`FileReader`) procesa el contenido directamente en la memoria del navegador, sin necesidad de subir archivos a un servidor externo.
+
 * **Motor de Renderizado Dinámico:** La lógica en JavaScript interpreta las claves del archivo JSON y las traduce en componentes visuales:
   * Inyecta las redes sociales (RRSS) y avatares directamente debajo de los bloques de Grupo y Autores respetando una alineación en cuadrícula.
   * Renderiza dinámicamente las pestañas de selección para navegar entre personajes sin recargar la página.
   * Modifica y limpia sobre la marcha los códigos embed (iFrames) para neutralizar dimensiones fijas no adaptativas.
+
 * **Sincronización Dual (Visor / Editor):** La aplicación incluye un editor JSON integrado que sincroniza el código en tiempo real con el visor visual, permitiendo exportar el resultado final actualizado en cualquier momento.
+
+* **Sistema de Autoload**. Al iniciar por primera vez  se pueden cargar por defecto unas fichas.  Se puede hacer con los siguientes criterios: 
+  * **Prioridad 1 (`story.json`):** Intenta cargar `./story.json` directamente. Si existe y es una ficha válida, la abre inmediatamente.
+
+  * **Prioridad 2 (`autoload.json`):** Si no hay un `story.json` local, consulta el índice `autoload.json` para cargar la lista de fichas disponibles en el explorador. Ese fichero almacena una lista de fichas a presentar por primera vez.
+
+  * **Prioridad 3** (opción demo): Si no existen esos ficheros, se muestra un proyecto de demo.
+
+    Sin embargo, este sistema de Autoload funciona siempre que esté el código alojado en un servidor, ya que por  **medida de seguridad estándar de todos los navegadores modernos** (Chrome, Firefox, Edge, Safari), no se puede hacer lectura de ficheros autoload en modo local. 
 
 
 
@@ -181,7 +194,17 @@ Para evitar errores en este proceso, se puede **pedir a cualquier IA que convier
 
 
 
+#### 4.2. Estructura del Archivo de Carga Automática (`autoload.json`)
 
+Para automatizar la carga de múltiples proyectos al abrir la plataforma en producción (por ejemplo, en GitHub Pages), basta con alojar un archivo `autoload.json` en la raíz con el siguiente formato: (se recomienda que todas las fichas estén alojadas en una carpeta, p.e. ``/stories``)
+
+```json
+[
+  "story.json",
+  "stories/starwars.json",
+  "stories/nora.json"
+]
+```
 
 
 

@@ -1,0 +1,125 @@
+{
+  "titulo": "Star Wars: La Sombra de la República",
+  "descripcion": "Un proyecto transmedia ambientado en los inicios de la Guerra de los Clones. La narrativa explora la propaganda bélica, el auge del lado oscuro en los bordes exteriores y el dilema moral de los caballeros Jedi a través de películas, episodios interactivos de animación, audio-dramas, cómics en Webtoon y una experiencia ARG de descifrado de transmisiones de la HoloRed.",
+  "palabrasClave": ["Ópera Espacial", "Sci-Fi", "Fantasía", "Guerra de los Clones", "Jedi", "Transmedia"],
+  "imagen": "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80",
+  "grupo": "Lucasfilm & Transmedia Story Lab UGR",
+  "autores": "George Lucas, Dave Filoni & Colectivo Transmedia",
+  "fecha": "2026",
+  "version": "1.5",
+  "RRSS": [
+    { "nombre": "Twitter", "link": "https://twitter.com/starwars", "img": "" },
+    { "nombre": "Instagram", "link": "https://instagram.com/starwars", "img": "" },
+    { "nombre": "YouTube", "link": "https://youtube.com/starwars", "img": "" },
+    { "nombre": "GitHub", "link": "https://github.com/mgea", "img": "" },
+    { "nombre": "Web Oficial", "link": "https://starwars.com", "img": "" }
+  ],
+  "Avatar": [
+    { "nombre": "Dave Filoni", "link": "https://starwars.com", "img": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" },
+    { "nombre": "George Lucas", "link": "https://starwars.com", "img": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" }
+  ],
+  "personajes": [
+    {
+      "nombre": "Anakin Skywalker",
+      "cita": "«La compasión, que yo definiría como amor incondicional, es esencial para la vida de un Jedi.»",
+      "biografia": "Antiguo esclavo de Tatooine y Caballero Jedi profetizado como el Elegido. Durante las Guerras Clones, lidera la Legión 501 combatiendo a los Separatistas mientras lucha en secreto contra sus propios apegos y el temor a la pérdida.",
+      "objetivo": "Traer la paz a la galaxia, proteger a sus seres queridos y demostrar su valía ante el Consejo Jedi.",
+      "conflicto": "Se debate constantemente entre el estricto código de desapego de la Orden Jedi y la tentación de usar el Lado Oscuro para salvar a quien ama.",
+      "etiquetas": ["Protagonista", "Caballero Jedi", "Piloto", "El Elegido"],
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80",
+      "alt": "Anakin Skywalker sosteniendo su sable de luz azul",
+      "personalidad": "Impulsivo, apasionado, leal, valiente e impaciente. Posee un fuerte instinto protector.",
+      "motivacion": "Proteger a su esposa Padmé y a su padawan Ahsoka de las amenazas de la guerra.",
+      "habilidades": "Pilotaje de cazas espacial sin igual, maestría en la forma V de combate con sable y un vínculo atípico con la Fuerza.",
+      "debilidades": "Ira contenida, miedo intenso al abandono y renuencia a acatar la autoridad rígida.",
+      "secreto": "Está casado en secreto con la senadora Padmé Amidala, violando directamente el código de la Orden Jedi."
+    },
+    {
+      "nombre": "Ahsoka Tano",
+      "cita": "«No soy una Jedi.»",
+      "biografia": "Padawan Togruta asignada a Anakin Skywalker durante la Batalla de Christophsis. A través de numerosas misiones en la galaxia, evoluciona de una joven impetuosa a una hábil comandante al mando del Batallón 332.",
+      "objetivo": "Encontrar su propio camino dentro de la Fuerza y defender a los inocentes atrapados en las Guerras Clones.",
+      "conflicto": "Lucha por reconciliar los ideales de la República con la corrupción política y la desconexión del Consejo Jedi.",
+      "etiquetas": ["Padawan", "Comandante", "Togruta", "Luchadora"],
+      "url": "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=500&q=80",
+      "alt": "Retrato conceptual de Ahsoka Tano con sables de luz",
+      "personalidad": "Perseverante, ingeniosa, leal, compasiva e idealista.",
+      "motivacion": "Hacer lo correcto y no defraudar a su maestro Anakin ni a los soldados clon a su cargo.",
+      "habilidades": "Dominio del estilo Jar'Kai (dos sables de luz), gran agilidad física y dotes de liderazgo operacional.",
+      "debilidades": "Terquedad inicial y tendencia a arriesgarse excesivamente por sus amigos.",
+      "secreto": "Ha tenido visiones proféticas sobre la caída de la República que no se atreve a revelar al Consejo Jedi."
+    }
+  ],
+  "experiencias": [
+    {
+      "tipo": "incrustado",
+      "experiencia": "Simulador H5P: Prueba de Aptitud de la Academia Militar Coruscant",
+      "descripcion": "Módulo interactivo donde el usuario toma decisiones tácticas como oficial de la República para resolver un bloqueo separatista.",
+      "embed": "<div class=\"w-full h-48 bg-[#1A1A1A] text-[#F9F6F0] rounded-lg p-6 flex flex-col justify-center items-center text-center border border-[#D96B43]/40\"><i class=\"fa-solid fa-jedi text-3xl text-[#D96B43] mb-2\"></i><h4 class=\"font-bold font-display text-lg\">Simulador de Táctica Naval Republicana</h4><p class=\"text-xs text-gray-400 max-w-md mt-1\">Cargando módulo interactivo de despliegue militar... (Representación embebida H5P)</p><button onclick=\"alert('Simulador de mando iniciado.')\" class=\"mt-3 bg-[#D96B43] hover:bg-[#C85A32] text-white text-xs px-4 py-1.5 rounded font-semibold\">Iniciar Prueba de Táctica</button></div>"
+    },
+    {
+      "tipo": "galeria",
+      "experiencia": "Galería de Arte Conceptual: Naves & Planetas",
+      "url": [
+        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=600&q=80",
+        "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&w=600&q=80"
+      ]
+    }
+  ],
+  "conexiones": [
+    {
+      "plataforma": "Audio-drama 'Relatos desde la HoloRed'",
+      "tipo": "Serie en formato Podcast",
+      "imagen": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=200&q=80",
+      "enlace": "https://spotify.com"
+    },
+    {
+      "plataforma": "Comic Webtoon 'Memorias del Borde Exterior'",
+      "tipo": "Novela Gráfica Digital",
+      "imagen": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=200&q=80",
+      "enlace": "https://webtoons.com"
+    },
+    {
+      "plataforma": "Terminal de Cifrado Separatista (ARG)",
+      "tipo": "Juego de Realidad Alternativa en GitHub",
+      "imagen": "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?auto=format&fit=crop&w=200&q=80",
+      "enlace": "https://github.com/mgea/criav"
+    }
+  ],
+  "procesoDisenoMetodologia": {
+    "inspiracion": {
+      "referentes": [
+        "Cine bélico clásico (The Dam Busters) y seriales de aventuras de los años 30",
+        "Diseño industrial retro-futurista y estética del arte del templo Jedi",
+        "Propaganda histórica de la II Guerra Mundial adaptada a la HoloRed"
+      ],
+      "moodboardUrl": "https://pinterest.com",
+      "palabraConcepto": "Pinceladas doradas e iluminación tenue sobre estructuras metálicas desgastadas por el combate."
+    },
+    "metodologia": {
+      "marcoframing": "Transmedia Storytelling Canvas & Lucasfilm Canon Matrix",
+      "fasesProceso": [
+        "Definición de la cronología galáctica y bíblia del universo",
+        "Modelado de personajes y diseño de arquetipos",
+        "Producción distribuida de contenidos (Audio, Cómic y Experiencias Web)",
+        "Lanzamiento sincronizado en plataformas digitales"
+      ]
+    },
+    "herramientas": [
+      {
+        "categoria": "Diseño UI/UX",
+        "items": ["Figma", "Tailwind CSS", "Unreal Engine 5"]
+      },
+      {
+        "categoria": "Desarrollo & Prototipado",
+        "items": ["HTML5/JS", "H5P", "Web Audio API"]
+      },
+      {
+        "categoria": "Gestión & Documentación",
+        "items": ["GitHub", "Notion", "Miro"]
+      }
+    ]
+  }
+}
