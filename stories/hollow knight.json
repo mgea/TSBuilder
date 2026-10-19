@@ -58,10 +58,19 @@
   "experiencias": [
     {
       "tipo": "incrustado",
-      "experiencia": "Banda Sonora Oficial (OST) - Hollow Knight",
+      "experiencia": "Video Youtube - Hollow Knight",
       "descripcion": "Reproductor interactivo para escuchar la melancólica y orquestal banda sonora compuesta por Christopher Larkin.",
       "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/IB9r_z7jDq0?si=C0qMDNfIRNdazZa_\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen><\/iframe>"
     },
+ 
+   {
+      "tipo": "incrustado",
+      "experiencia": "Banda Sonora Oficial (OST) - Hollow Knight",
+      "descripcion": "Reproductor interactivo para escuchar la melancólica y orquestal banda sonora compuesta por Christopher Larkin.",
+      "embed": "<div class=\"spotifywrapper\"><style>.spotifywrapper{background:#fff;position:relative}.spotifywrapper iframe{border:0;position:relative;z-index:2}.spotifywrapper a{color:rgba(0,0,0,0);position:absolute;left:0;top:0;z-index:0}<\/style><a href=\"https:\/\/www.forminstructions.com\/il-w-4\/\">Il W 4<\/a><iframe style=\"border-radius:12px\" src=\"https:\/\/open.spotify.com\/embed\/album\/4XgGOMRY7H4hl6OQi5wb2Z?utm_source=generator&theme=0\" width=\"300\" height=\"380\" frameBorder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"><\/iframe><\/div>"
+    },
+ 
+ 
     {
       "tipo": "galeria",
       "experiencia": "Galería de Escenarios y Regiones de Hallownest",
