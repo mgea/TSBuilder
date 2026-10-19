@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
     
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -1385,27 +1385,58 @@
       document.getElementById('notification-banner').classList.add('hidden');
     }
 
-/***** Autoload desde autoload.json ****/
+/***** Prioridades de Autoload de fichas:   
+ *     1º si exixte story.json 
+ *     2º si existe autoload.json se cargan directamente 
+ *     3º carga fallout (por defecto) 
+ *     **************************************/
 
 async function autoLoadStoryJson() {
-  let loadedProjects = [];
-
+  // ------------------------------------------------------------------------
+  // PRIORIDAD 1: Intentar cargar 'story.json' directamente en la carpeta actual
+  // ------------------------------------------------------------------------
   try {
-    // 1. Intentar cargar el índice centralizado
+    const storyRes = await fetch('./story.json');
+    if (storyRes.ok) {
+      const storyData = await storyRes.json();
+      if (validProject(storyData)) {
+        const primaryProject = {
+          data: storyData,
+          filename: 'story.json',
+          source: 'local-priority'
+        };
+
+        // Guardar en el catálogo
+        browserProjects = [primaryProject];
+        renderProjectBrowser();
+
+        // Cargar datos de la ficha
+        loadProjectData(storyData, "Ficha 'story.json' cargada de forma prioritaria.");
+
+        // Mostrar directamente el visualizador y ocultar el explorador
+        document.getElementById('view-project-browser').classList.add('hidden');
+        document.getElementById('view-project-visualizer').classList.remove('hidden');
+        return; // Finalizar la ejecución con éxito
+      }
+    }
+  } catch (e) {
+    // Si no existe story.json o da error en local file://, continúa a la Prioridad 2
+  }
+
+  // ------------------------------------------------------------------------
+  // PRIORIDAD 2: Si no hay story.json, intentar leer 'autoload.json'
+  // ------------------------------------------------------------------------
+  let loadedProjects = [];
+  try {
     const response = await fetch('./autoload.json');
-    
     if (response.ok) {
       const projectPaths = await response.json();
-      
-
-      // Verificar que el JSON devuelva una lista/array de rutas
       if (Array.isArray(projectPaths)) {
         for (const path of projectPaths) {
           try {
             const res = await fetch(path);
             if (res.ok) {
               const data = await res.json();
-              // Omite el fichero si no es un JSON estructurado de proyecto válido
               if (validProject(data)) {
                 const filename = path.split('/').pop();
                 if (!loadedProjects.some(p => p.filename === filename)) {
@@ -1418,29 +1449,32 @@ async function autoLoadStoryJson() {
               }
             }
           } catch (err) {
-            // Se omite silenciosamente la ficha si no existe o falla la lectura
             console.warn(`[AutoLoad] Ficha omitida en '${path}':`, err.message);
           }
         }
       }
     }
   } catch (e) {
-    // Se omite si autoload.json no existe o tiene un error de sintaxis
-    console.warn("[AutoLoad] No se pudo procesar 'autoload.json':", e.message);
+    console.warn("[AutoLoad] No se encontró 'autoload.json':", e.message);
   }
 
-  // 2. Si se recuperaron fichas válidas, se inyectan en el explorador
+  // ------------------------------------------------------------------------
+  // PRIORIDAD 3: Cargar en el explorador lo encontrado o usar el Fallback Demo
+  // ------------------------------------------------------------------------
   if (loadedProjects.length > 0) {
     browserProjects = loadedProjects;
     renderProjectBrowser();
     showNotification(`Se cargaron ${loadedProjects.length} proyecto(s) desde 'autoload.json'.`, "success");
   } else {
-    // Fallback: Si no existen fichas o falló autoload.json, se carga la ficha por defecto
+    // Fallback por defecto
     browserProjects = [{ data: DEMO_PROJECT_DATA, filename: "Proyecto de demostración", source: "demo" }];
     renderProjectBrowser();
     console.log("[AutoLoad] Cargado proyecto por defecto (Fallback).");
   }
 }
+
+
+ 
 
 function initApp() {
   setupDragAndDrop();
