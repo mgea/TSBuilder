@@ -60,7 +60,7 @@
       "tipo": "incrustado",
       "experiencia": "Banda Sonora Oficial (OST) - Hollow Knight",
       "descripcion": "Reproductor interactivo para escuchar la melancólica y orquestal banda sonora compuesta por Christopher Larkin.",
-      "embed": "<iframe style=\"border-radius:12px\" src=\"https://open.spotify.com/embed/album/43B98O33P2L58SFrvyR92t?utm_source=generator\" width=\"100%\" height=\"352\" frameborder=\"0\" allowfullscreen=\"\" allow=\"autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture\" loading=\"lazy\"></iframe>"
+      "embed": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/IB9r_z7jDq0?si=C0qMDNfIRNdazZa_\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen><\/iframe>"
     },
     {
       "tipo": "galeria",
